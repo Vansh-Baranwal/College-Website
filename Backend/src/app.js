@@ -4,6 +4,7 @@ const chatRoutes = require('./routes/chat.routes');
 const authRoutes = require('./routes/auth.routes');
 const dataRoutes = require('./routes/data.routes');
 const searchRoutes = require('./routes/search.routes');
+const raggingRoutes = require('./routes/ragging.routes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/data', dataRoutes);
 app.use('/api/search', searchRoutes);
+app.use('/api/ragging', raggingRoutes);
 
 // Root API route
 app.get("/api", (req, res) => {
