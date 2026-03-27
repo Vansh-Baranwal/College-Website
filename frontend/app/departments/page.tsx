@@ -1,9 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Building, Users, BookOpen, ExternalLink, ChevronRight } from "lucide-react";
 
-const departments = [
+const STATIC_DEPTS = [
   { name: "Computer Science & Engineering", code: "CSE", hod: "Prof. S. Arun Kumar", faculty: 52, students: 1200, programs: ["B.Tech", "M.Tech", "PhD"], color: "from-blue-500 to-indigo-600" },
   { name: "Electrical Engineering", code: "EE", hod: "Prof. Bhim Singh", faculty: 48, students: 1050, programs: ["B.Tech", "M.Tech", "PhD"], color: "from-yellow-500 to-orange-600" },
   { name: "Mechanical Engineering", code: "ME", hod: "Prof. P. M. Pandey", faculty: 45, students: 980, programs: ["B.Tech", "M.Tech", "PhD"], color: "from-red-500 to-rose-600" },
@@ -15,6 +16,13 @@ const departments = [
 ];
 
 export default function DepartmentsPage() {
+  const [departments, setDepartments] = useState(STATIC_DEPTS);
+
+  useEffect(() => {
+    import("@/lib/api").then(({ getDepartments }) =>
+      getDepartments().then(data => { if (data?.length) setDepartments(data); }).catch(() => {})
+    );
+  }, []);
   return (
     <div className="min-h-screen pt-24 pb-20 px-6 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-500/5 blur-[120px] rounded-full pointer-events-none" />

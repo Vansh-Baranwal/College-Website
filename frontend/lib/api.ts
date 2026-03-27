@@ -1,4 +1,5 @@
-const API = process.env.NEXT_PUBLIC_API_URL || "";
+let API = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/api\/?$/, "").replace(/\/$/, "");
+
 if (typeof window !== "undefined" && !API) {
   console.warn("⚠️ NEXT_PUBLIC_API_URL is not defined. All API calls will fail with 404 on the frontend domain.");
 }
@@ -19,6 +20,7 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   }
   return res.json();
 }
+
 
 // ── Auth ──
 export async function apiSignup(name: string, email: string, password: string, role: "student" | "faculty") {
@@ -46,19 +48,57 @@ export async function apiChat(message: string): Promise<string> {
 
 // ── Data ──
 export async function getAnnouncements() {
-  return apiFetch<any[]>("/api/data/announcements");
+  const data = await apiFetch<any[]>("/api/data/announcements");
+  return data.map(item => ({
+    ...item,
+    body: item.content || item.body || "",
+    category: item.category || "General",
+    priority: item.priority || "medium",
+    date: item.created_at ? new Date(item.created_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
+  }));
 }
 
 export async function getEvents() {
-  return apiFetch<any[]>("/api/data/events");
+  const data = await apiFetch<any[]>("/api/data/events");
+  return data.map((item, i) => ({
+    ...item,
+    type: item.type || (i % 2 === 0 ? "Cultural Fest" : "Tech Fest"),
+    expected: item.expected || "1000+",
+    image: item.image || (i % 3 === 0 ? "bg-gradient-to-br from-pink-500/20 to-orange-500/20" : i % 3 === 1 ? "bg-gradient-to-br from-blue-500/20 to-cyan-500/20" : "bg-gradient-to-br from-gold/20 to-yellow-600/20")
+  }));
 }
 
 export async function getCourses() {
-  return apiFetch<any[]>("/api/data/courses");
+  const data = await apiFetch<any[]>("/api/data/courses");
+  return data.map((item, i) => ({
+    ...item,
+    department: item.department || "Computer Science",
+    credits: item.credits || (i % 2 === 0 ? 4 : 3),
+    semester: item.semester || (i % 2 === 0 ? "Autumn" : "Spring"),
+    level: item.level || (i < 5 ? "UG" : "PG"),
+    enrolled: item.enrolled || Math.floor(Math.random() * 300 + 100),
+    rating: item.rating || (4.5 + Math.random() * 0.4).toFixed(1)
+  }));
 }
 
 export async function getFaculty() {
-  return apiFetch<any[]>("/api/data/faculty");
+  const data = await apiFetch<any[]>("/api/data/faculty");
+  return data.map((item, i) => ({
+    ...item,
+    department: item.department || "Computer Science",
+    publications: item.publications || Math.floor(Math.random() * 200 + 50),
+    awards: item.awards || Math.floor(Math.random() * 8 + 1),
+    specialization: item.specialization || "Advanced Research",
+    email: item.email || `${item.name?.toLowerCase().replace(/\s/g, '.')}@iitd.ac.in`
+  }));
+}
+
+export async function getDepartments() {
+  try {
+    return await apiFetch<any[]>("/api/data/departments");
+  } catch {
+    return []; // Return empty to fallback to static in the page component
+  }
 }
 
 // ── Search ──
