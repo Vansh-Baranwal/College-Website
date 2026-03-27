@@ -4,14 +4,21 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, Users, ArrowRight, Zap } from "lucide-react";
 
-const events = [
+const MOCK = [
   { id: "1", title: "Rendezvous 2024", date: new Date(Date.now() + 86400000 * 12).toISOString(), location: "OAT, IIT Delhi", type: "Cultural Fest", expected: "10k+", image: "bg-gradient-to-br from-pink-500/20 to-orange-500/20" },
   { id: "2", title: "Tryst 2024", date: new Date(Date.now() + 86400000 * 45).toISOString(), location: "Lecture Hall Complex", type: "Tech Fest", expected: "5k+", image: "bg-gradient-to-br from-blue-500/20 to-cyan-500/20" },
   { id: "3", title: "Alumni Meet & Gala", date: new Date(Date.now() + 86400000 * 60).toISOString(), location: "Dogra Hall", type: "Networking", expected: "500+", image: "bg-gradient-to-br from-gold/20 to-yellow-600/20" },
 ];
 
 export default function EventsPage() {
+  const [events, setEvents] = useState(MOCK);
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: { d: number, h: number, m: number, s: number } }>({});
+
+  useEffect(() => {
+    import("@/lib/api").then(({ getEvents }) =>
+      getEvents().then(data => { if (data?.length) setEvents(data); }).catch(() => {})
+    );
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {

@@ -1,22 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, Users, Star, ChevronDown, Filter } from "lucide-react";
 
-const courses = [
+const MOCK = [
   { code: "CSL100", name: "Introduction to Computer Science", department: "Computer Science", credits: 4, semester: "Autumn", level: "UG", enrolled: 450, rating: 4.8 },
   { code: "MTL106", name: "Probability & Stochastic Processes", department: "Mathematics", credits: 4, semester: "Spring", level: "UG", enrolled: 320, rating: 4.2 },
   { code: "ELL201", name: "Digital Electronics", department: "Electrical Engineering", credits: 4, semester: "Autumn", level: "UG", enrolled: 280, rating: 4.5 },
   { code: "COL774", name: "Machine Learning", department: "Computer Science", credits: 4, semester: "Autumn", level: "PG", enrolled: 180, rating: 4.9 },
   { code: "PHL101", name: "Classical Mechanics", department: "Physics", credits: 4, semester: "Spring", level: "UG", enrolled: 350, rating: 4.3 },
-  { code: "CHL101", name: "Introduction to Chemical Engineering", department: "Chemical Engineering", credits: 3, semester: "Autumn", level: "UG", enrolled: 150, rating: 4.0 },
-  { code: "COL380", name: "Parallel Programming", department: "Computer Science", credits: 3, semester: "Spring", level: "UG", enrolled: 120, rating: 4.6 },
-  { code: "HUL256", name: "Creative Writing", department: "Humanities", credits: 3, semester: "Spring", level: "UG", enrolled: 90, rating: 4.7 },
 ];
 
 export default function CoursesPage() {
+  const [courses, setCourses] = useState(MOCK);
   const [levelFilter, setLevelFilter] = useState("All");
+
+  useEffect(() => {
+    import("@/lib/api").then(({ getCourses }) =>
+      getCourses().then(data => { if (data?.length) setCourses(data); }).catch(() => {})
+    );
+  }, []);
+
   const filtered = levelFilter === "All" ? courses : courses.filter(c => c.level === levelFilter);
 
   return (

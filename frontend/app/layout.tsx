@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/lib/context";
+import { AuthProvider } from "@/lib/auth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -41,6 +42,7 @@ export default function RootLayout({
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} antialiased`}
       >
         <AppProvider>
+          <AuthProvider>
           <div className="fixed inset-0 w-full h-full -z-50 overflow-hidden bg-primary">
             <video
               autoPlay
@@ -67,6 +69,7 @@ export default function RootLayout({
             </PageTransition>
             <Footer />
           </SmoothScroll>
+          </AuthProvider>
         </AppProvider>
       </body>
     </html>

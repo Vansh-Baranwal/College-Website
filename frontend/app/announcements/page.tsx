@@ -1,16 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell, Pin, Clock, ChevronRight, AlertTriangle, Info, Star, Megaphone } from "lucide-react";
 
-const announcements = [
-  { id: 1, title: "Mid-Semester Examination Schedule Released", body: "The mid-semester examination for all UG and PG programmes will commence from April 14, 2026. Students are advised to check their respective department portals for the detailed timetable.", category: "Academic", pinned: true, date: "2026-03-25", priority: "high" },
-  { id: 2, title: "Campus Wi-Fi Upgrade — Maintenance Window", body: "The campus-wide Wi-Fi infrastructure will undergo a planned upgrade on March 30, 2026 from 2:00 AM to 6:00 AM. Expect intermittent connectivity during this window.", category: "IT Services", pinned: false, date: "2026-03-24", priority: "medium" },
-  { id: 3, title: "Rendezvous 2026 — Volunteer Registration Open", body: "The annual cultural festival Rendezvous is looking for enthusiastic volunteers. Register on the student portal before April 1, 2026.", category: "Events", pinned: true, date: "2026-03-23", priority: "low" },
-  { id: 4, title: "New Research Grant for AI & ML Lab", body: "The Department of Computer Science has secured a ₹15 Cr research grant from SERB for advanced AI/ML research. Interested faculty and PhD scholars may apply.", category: "Research", pinned: false, date: "2026-03-22", priority: "high" },
-  { id: 5, title: "Library Extended Hours During Exam Season", body: "The Central Library will remain open 24/7 from April 10 to April 30 to support students during the examination period.", category: "Facilities", pinned: false, date: "2026-03-20", priority: "low" },
-  { id: 6, title: "Hostel Allotment for 2026-27 Session", body: "Hostel allotment for the upcoming academic session is now available on the student portal. Confirm your preferences before March 31.", category: "Administration", pinned: false, date: "2026-03-18", priority: "medium" },
+const MOCK = [
+  { id: 1, title: "Mid-Semester Examination Schedule Released", body: "The mid-semester examination for all UG and PG programmes will commence from April 14, 2026.", category: "Academic", pinned: true, date: "2026-03-25", priority: "high" },
+  { id: 2, title: "Campus Wi-Fi Upgrade — Maintenance Window", body: "The campus-wide Wi-Fi infrastructure will undergo a planned upgrade on March 30, 2026.", category: "IT Services", pinned: false, date: "2026-03-24", priority: "medium" },
+  { id: 3, title: "Rendezvous 2026 — Volunteer Registration Open", body: "The annual cultural festival Rendezvous is looking for enthusiastic volunteers.", category: "Events", pinned: true, date: "2026-03-23", priority: "low" },
+  { id: 4, title: "New Research Grant for AI & ML Lab", body: "The Department of Computer Science has secured a ₹15 Cr research grant from SERB.", category: "Research", pinned: false, date: "2026-03-22", priority: "high" },
 ];
 
 const priorityConfig = {
@@ -20,8 +18,16 @@ const priorityConfig = {
 };
 
 export default function AnnouncementsPage() {
+  const [announcements, setAnnouncements] = useState(MOCK);
   const [selected, setSelected] = useState<number | null>(null);
   const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    import("@/lib/api").then(({ getAnnouncements }) =>
+      getAnnouncements().then(data => { if (data?.length) setAnnouncements(data); }).catch(() => {})
+    );
+  }, []);
+
   const categories = ["All", ...Array.from(new Set(announcements.map(a => a.category)))];
   const filtered = filter === "All" ? announcements : announcements.filter(a => a.category === filter);
 

@@ -129,15 +129,23 @@ export default function Navbar() {
           })}
         </nav>
 
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:block relative group">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-gold to-orange-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+        <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/chat"
-            className="relative flex items-center justify-center bg-black/80 backdrop-blur-md px-6 py-2 rounded-full font-bold text-sm text-white group-hover:text-gold transition-colors shadow-xl"
+            href="/login"
+            className="px-5 py-2 rounded-full text-sm font-medium text-white/70 border border-white/10 hover:bg-white/10 hover:text-white transition-all"
           >
-            AI Assistant
+            Login
           </Link>
-        </motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-gold to-orange-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+            <Link
+              href="/chat"
+              className="relative flex items-center justify-center bg-black/80 backdrop-blur-md px-6 py-2 rounded-full font-bold text-sm text-white group-hover:text-gold transition-colors shadow-xl"
+            >
+              AI Assistant
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </header>
   );

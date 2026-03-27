@@ -36,11 +36,15 @@ export default function ChatPage() {
     setInput("");
     setIsLoading(true);
 
-    // Mock API call
-    setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'ai', content: `Here is some information regarding "${userMsg}". The campus has many facilities, and the upcoming events can be found in the events section.` }]);
+    try {
+      const { apiChat } = await import("@/lib/api");
+      const reply = await apiChat(userMsg);
+      setMessages(prev => [...prev, { role: 'ai', content: reply }]);
+    } catch {
+      setMessages(prev => [...prev, { role: 'ai', content: `I'm sorry, I couldn't process your request right now. Please try again later.` }]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   return (

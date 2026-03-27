@@ -1,23 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, BookOpen, Mail, Globe, Award, GraduationCap, Filter } from "lucide-react";
 
-const faculty = [
+const MOCK = [
   { name: "Prof. Subhashis Banerjee", department: "Computer Science", designation: "Professor", specialization: "Computer Vision, Machine Learning", email: "suban@cse.iitd.ac.in", publications: 180, awards: 5 },
-  { name: "Prof. Aaditeshwar Seth", department: "Computer Science", designation: "Associate Professor", specialization: "ICT for Development, Social Media", email: "aseth@cse.iitd.ac.in", publications: 95, awards: 3 },
   { name: "Prof. Bhim Singh", department: "Electrical Engineering", designation: "Professor", specialization: "Power Electronics, Drives", email: "bhim@ee.iitd.ac.in", publications: 650, awards: 12 },
   { name: "Prof. Naveen Garg", department: "Computer Science", designation: "Professor", specialization: "Algorithms, Combinatorics", email: "naveen@cse.iitd.ac.in", publications: 120, awards: 4 },
-  { name: "Prof. S. Jayanth", department: "Mechanical Engineering", designation: "Professor", specialization: "Micro/Nano Manufacturing, MEMS", email: "sjayanth@mech.iitd.ac.in", publications: 200, awards: 6 },
-  { name: "Prof. Reetika Khera", department: "Humanities & Social Sciences", designation: "Associate Professor", specialization: "Development Economics, Social Policy", email: "rkhera@hss.iitd.ac.in", publications: 75, awards: 2 },
-  { name: "Prof. Amlan Chakrabarti", department: "Physics", designation: "Professor", specialization: "Quantum Computing, Condensed Matter", email: "amlan@phy.iitd.ac.in", publications: 150, awards: 3 },
   { name: "Prof. Anurag Rathore", department: "Chemical Engineering", designation: "Professor", specialization: "Bioprocessing, Biopharmaceuticals", email: "arathore@che.iitd.ac.in", publications: 250, awards: 8 },
 ];
 
 export default function FacultyPage() {
+  const [faculty, setFaculty] = useState(MOCK);
   const [search, setSearch] = useState("");
   const [deptFilter, setDeptFilter] = useState("All");
+
+  useEffect(() => {
+    import("@/lib/api").then(({ getFaculty }) =>
+      getFaculty().then(data => { if (data?.length) setFaculty(data); }).catch(() => {})
+    );
+  }, []);
+
   const allDepts = ["All", ...Array.from(new Set(faculty.map(f => f.department)))];
   const filtered = faculty
     .filter(f => deptFilter === "All" || f.department === deptFilter)
