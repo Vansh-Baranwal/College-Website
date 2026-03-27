@@ -77,7 +77,9 @@ export async function getCourses() {
     semester: item.semester || (i % 2 === 0 ? "Autumn" : "Spring"),
     level: item.level || (i < 5 ? "UG" : "PG"),
     enrolled: item.enrolled || Math.floor(Math.random() * 300 + 100),
-    rating: item.rating || (4.5 + Math.random() * 0.4).toFixed(1)
+    rating: item.rating || (4.5 + Math.random() * 0.4).toFixed(1),
+    faculty: item.faculty || (i % 3 === 0 ? "Dr. Naveen Garg" : i % 3 === 1 ? "Prof. Mausam" : "Dr. Sorav Bansal"),
+    intro: item.description || "An intensive course covering foundational concepts and advanced applications in the field."
   }));
 }
 
