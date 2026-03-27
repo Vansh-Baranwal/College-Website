@@ -1,11 +1,9 @@
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { path: string[] } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   // Await the params correctly as required by Next.js 15+ 
-  // Wait, Next 14 handles params securely, but Next 15 awaits them. 
-  // We'll safely use params.path
-  
-  const pathParts = params.path || [];
+  const resolvedParams = await params;
+  const pathParts = resolvedParams.path || [];
   const path = pathParts.join("/");
   const url = new URL(request.url);
   const search = url.search;
