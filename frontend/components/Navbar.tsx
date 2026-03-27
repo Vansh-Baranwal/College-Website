@@ -36,13 +36,22 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-primary font-bold font-serif shadow-[0_0_15px_rgba(201,168,76,0.5)]">
-            IIT
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12">
+            <img 
+              src="/logo.png" 
+              alt="IIT Delhi Logo" 
+              className="w-full h-full object-contain filter brightness-0 invert" 
+            />
           </div>
-          <span className="font-serif text-xl font-semibold tracking-wide text-white">
-            IIT <span className="text-gold transition-colors duration-300 group-hover:text-gold-light">Delhi</span>
-          </span>
+          <div className="flex flex-col">
+            <span className="font-serif text-lg font-bold tracking-tight text-white leading-tight">
+              IIT <span className="text-gold">Delhi</span>
+            </span>
+            <span className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] font-sans -mt-1 font-medium group-hover:text-gold transition-colors">
+              Campus OS
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}

@@ -7,7 +7,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Column 1 */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-6">
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
+              <div className="relative w-10 h-10">
+                <img 
+                  src="/logo.png" 
+                  alt="IIT Delhi Logo" 
+                  className="w-full h-full object-contain filter brightness-0 invert" 
+                />
+              </div>
               <span className="font-serif text-2xl font-semibold text-white">
                 IIT <span className="text-gold">Delhi</span>
               </span>

@@ -53,15 +53,19 @@ export default function DigitalIDPage() {
             <div className="relative z-10 p-8">
               {/* Header */}
               <div className="flex justify-between items-center mb-8">
-                 <div className="flex items-center gap-3">
-                   <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center text-primary font-bold font-serif shadow-lg">
-                     IIT
-                   </div>
-                   <div>
-                     <p className="text-xs text-gold uppercase tracking-widest font-bold">IIT Delhi</p>
-                     <p className="text-[10px] text-muted">Student ID</p>
-                   </div>
-                 </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 relative">
+                      <img 
+                        src="/logo.png" 
+                        alt="IITD Logo" 
+                        className="w-full h-full object-contain" 
+                      />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gold uppercase tracking-widest font-bold">IIT Delhi</p>
+                      <p className="text-[10px] text-muted">Student ID</p>
+                    </div>
+                  </div>
                  <Fingerprint className="w-8 h-8 text-white/20" />
               </div>
 

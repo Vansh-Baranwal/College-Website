@@ -20,6 +20,20 @@ export default function Home() {
             Ranked #1 in India — NIRF 2024
           </motion.div>
           
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            className="mb-8 relative"
+          >
+            <div className="absolute inset-0 bg-gold/20 blur-2xl rounded-full" />
+            <img 
+              src="/logo.png" 
+              alt="IIT Delhi Seal" 
+              className="w-24 h-24 md:w-32 md:h-32 object-contain relative z-10 filter brightness-0 invert opacity-80" 
+            />
+          </motion.div>
+          
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
