@@ -37,10 +37,15 @@ export default function PlacementPage() {
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Placement <span className="text-gold">Intelligence</span></h1>
             <p className="text-muted text-lg max-w-xl">Real-time statistics and historical data of IIT Delhi placements.</p>
           </div>
-          <button className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition flex items-center gap-2 text-sm text-white font-medium group">
+          <a 
+            href="https://www.flipbookpdf.net/web/site/084a44511e5f70d25576396001ed4a417af5b02fFBP29534988.pdf.html" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition flex items-center gap-2 text-sm text-white font-medium group"
+          >
             <Briefcase className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" />
             Download Brochure 2024
-          </button>
+          </a>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

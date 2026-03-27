@@ -12,7 +12,8 @@ import {
   ArrowRight,
   Wind,
   Droplets,
-  Activity
+  Activity,
+  Calendar
 } from "lucide-react";
 
 const boyHostels = [
