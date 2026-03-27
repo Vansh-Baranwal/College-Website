@@ -28,8 +28,32 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       },
     });
 
-    // We must read the body as an ArrayBuffer to proxy binary assets like images and fonts perfectly
-    const body = await response.arrayBuffer();
+    // Read the body as an ArrayBuffer to handle binary assets properly
+    const arrayBuffer = await response.arrayBuffer();
+    
+    const contentType = response.headers.get("content-type") || "";
+    let finalBody: BodyInit = arrayBuffer;
+
+    // INTERCEPT & REWRITE: If the response is text-based (HTML, JS, CSS, JSON),
+    // we must decode it and replace all hardcoded absolute URLs with our proxy path.
+    // This prevents the browser from bypassing our proxy and hitting CORS blocks.
+    if (
+      contentType.includes("text/html") ||
+      contentType.includes("javascript") ||
+      contentType.includes("text/css") ||
+      contentType.includes("application/json") ||
+      contentType.includes("text/plain")
+    ) {
+      const textDecoder = new TextDecoder("utf-8");
+      let text = textDecoder.decode(arrayBuffer);
+      
+      // Rewrite absolute domains to explicitly route through our proxy
+      text = text.replace(/https:\/\/international\.iitd\.ac\.in/gi, "/api/proxy");
+      text = text.replace(/http:\/\/international\.iitd\.ac\.in/gi, "/api/proxy");
+      
+      finalBody = text;
+    }
+
     const newHeaders = new Headers(response.headers);
     
     // THE CRITICAL FIX: Strip all security headers preventing iframe rendering
@@ -55,7 +79,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     // Force allow CORS on the proxy response
     newHeaders.set("Access-Control-Allow-Origin", "*");
 
-    return new Response(body, {
+    return new Response(finalBody, {
       status: response.status,
       statusText: response.statusText,
       headers: newHeaders,
