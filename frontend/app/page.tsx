@@ -444,6 +444,81 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════ DIRECTOR SECTION ═══════ */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-6 max-w-6xl relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Image Column */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="absolute -inset-4 bg-gold/10 blur-2xl rounded-[3rem] animate-pulse" />
+              <div className="relative rounded-[3rem] overflow-hidden border border-white/10 aspect-square md:aspect-auto md:h-[500px] group shadow-2xl">
+                <img 
+                  src="/director.png" 
+                  alt="Professor RANGAN BANERJEE" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8">
+                  <p className="text-gold font-mono text-xs uppercase tracking-[0.3em] font-bold mb-1">Director, IIT Delhi</p>
+                  <h3 className="text-white text-2xl font-bold tracking-tight">Prof. Rangan Banerjee</h3>
+                </div>
+              </div>
+              {/* Floating Badge */}
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-6 -right-6 bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-xl hidden md:block"
+              >
+                <div className="text-gold font-bold text-lg mb-1">Expert in</div>
+                <div className="text-white/60 text-xs uppercase tracking-widest font-medium leading-none">Energy Systems</div>
+              </motion.div>
+            </motion.div>
+
+            {/* Content Column */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div className="space-y-4">
+                <h2 className="text-4xl md:text-6xl font-sans font-bold text-white tracking-tighter leading-tight">
+                  Message from the <br/>
+                  <span className="bg-gradient-to-r from-amber-400 to-yellow-300 text-transparent bg-clip-text">Director</span>
+                </h2>
+                <div className="w-20 h-1 bg-gold rounded-full" />
+              </div>
+
+              <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light italic">
+                <p>
+                  &quot;Innovation at IIT Delhi is not just about technology; it&apos;s about creating a sustainable future and empowering the next generation of global leaders.&quot;
+                </p>
+                <p className="not-italic text-slate-400 text-base">
+                  Professor Rangan Banerjee is a world-renowned expert in Energy Systems and has been a driving force in renewable energy research and policy integration in India. Under his leadership, IIT Delhi continues to scale new heights in global research rankings and industry collaborations.
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <div className="flex flex-wrap gap-4">
+                  {["Energy Systems", "Policy Planning", "Sustainable Dev", "R&D Strategy"].map((tag) => (
+                    <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/50 text-[10px] uppercase tracking-widest font-bold">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════ CTA SECTION ═══════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-500/[0.03] to-transparent pointer-events-none" />
