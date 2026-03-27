@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Filter, MapPin, Building2, GraduationCap, Linkedin, Award } from "lucide-react";
+import { Search, Filter, MapPin, Building2, GraduationCap, Link as LinkIcon, Award } from "lucide-react";
 
 const alumni = [
   { name: "Sundar Pichai", batch: "1989", branch: "Metallurgical Engineering", company: "Google", role: "CEO", location: "California, USA", color: "from-blue-500/20 to-green-500/20" },
@@ -84,7 +84,7 @@ export default function AlumniPage() {
 
                     <div className="mt-6 flex justify-between items-center relative">
                         <button className="flex items-center gap-2 text-sm font-medium text-muted hover:text-white transition-colors">
-                            <Linkedin className="w-4 h-4" /> Connect
+                            <LinkIcon className="w-4 h-4" /> Connect
                         </button>
                         <button className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-xs font-medium text-white hover:bg-gold hover:text-primary hover:border-gold transition-colors">
                             View Profile

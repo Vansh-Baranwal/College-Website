@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, AreaChart, Area, CartesianGrid } from "recharts";
-import { Briefcase, Building2, TrendingUp, ArrowUpRight, Award, MapGlobus, DollarSign } from "lucide-react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, AreaChart, Area, CartesianGrid, Cell } from "recharts";
+import { Briefcase, Building, TrendingUp, ArrowUpRight, Award, Globe, DollarSign } from "lucide-react";
 
 const salaryData = [
   { year: "2020", avg: 16.5, max: 120 },
@@ -48,7 +48,7 @@ export default function PlacementPage() {
             { label: "Overall Placement", value: "94.5%", icon: TrendingUp, detail: "+2.1% from last year" },
             { label: "Highest Package", value: "₹ 2.4 Cr", icon: ArrowUpRight, detail: "International Offer" },
             { label: "Average Package", value: "₹ 25.8 LPA", icon: DollarSign, detail: "Across all branches" },
-            { label: "Recruiting Partners", value: "450+", icon: Building2, detail: "Fortune 500 included" },
+            { label: "Recruiting Partners", value: "450+", icon: Building, detail: "Fortune 500 included" },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -108,7 +108,7 @@ export default function PlacementPage() {
                   />
                   <Bar dataKey="hires" fill="#c9a84c" radius={[0, 4, 4, 0]}>
                     {companiesData.map((entry, index) => (
-                      <cell key={`cell-${index}`} fill={index % 2 === 0 ? '#c9a84c' : '#a78bfa'} />
+                      <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#c9a84c' : '#a78bfa'} />
                     ))}
                   </Bar>
                 </BarChart>
