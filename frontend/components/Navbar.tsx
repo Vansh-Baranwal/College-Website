@@ -38,6 +38,7 @@ const navItems = [
     href: "#",
     subLinks: [
       { name: "Antiragging", href: "/antiragging" },
+      { name: "Hostels", href: "/hostels" },
     ]
   },
 ];
