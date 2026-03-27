@@ -57,7 +57,7 @@ export default function AntiraggingPage() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#030712] relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden">
       {/* Background Accents */}
       <motion.div 
         style={{ y: bgY }}
