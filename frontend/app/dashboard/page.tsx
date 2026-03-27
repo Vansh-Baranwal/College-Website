@@ -16,6 +16,28 @@ const studentCgpaData = [
   { sem: "Sem 5", cgpa: 9.2 },
 ];
 
+const mockGrades = [
+  { course: "Operating Systems", code: "COL331", grade: "A-", credits: 4, status: "Current" },
+  { course: "Compiler Design", code: "COL702", grade: "A", credits: 4, status: "Current" },
+  { course: "Computer Networks", code: "COL334", grade: "B+", credits: 4, status: "Current" },
+  { course: "Artificial Intelligence", code: "COL333", grade: "A", credits: 4, status: "Current" },
+];
+
+const mockAssignments = [
+  { title: "Lab 3: System Calls", subject: "Operating Systems", due: "Tomorrow", status: "Pending", priority: "High" },
+  { title: "Symbol Table Impl", subject: "Compiler Design", due: "28 Mar", status: "Submitted", priority: "Medium" },
+  { title: "TCP Congestion Study", subject: "Computer Networks", due: "30 Mar", status: "In Progress", priority: "Medium" },
+  { title: "A* Search Alg", subject: "Artif. Intelligence", due: "02 Apr", status: "Pending", priority: "Low" },
+];
+
+const mockRoutine = [
+  { time: "09:00 AM", title: "Compiler Design", room: "LT-2", type: "Lecture", color: "bg-blue-500/20" },
+  { time: "11:00 AM", title: "Operating Systems", room: "LT-4", type: "Lecture", color: "bg-purple-500/20" },
+  { time: "01:00 PM", title: "Lunch Break", room: "Hostel Mess", type: "Break", color: "bg-amber-500/20" },
+  { time: "02:00 PM", title: "OS Lab", room: "Lab Block 2", type: "Practical", color: "bg-emerald-500/20" },
+  { time: "04:00 PM", title: "AI Seminar", room: "Srinivasan Hall", type: "Extra", color: "bg-cyan-500/20" },
+];
+
 export default function DashboardPage() {
   const { user, isLoading } = useAuth();
   const router = useRouter();
@@ -39,7 +61,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-10 pt-24">
+    <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-10 pt-24 pb-32">
       {/* Header */}
       <div className="flex justify-between items-end border-b border-white/10 pb-8">
         <div>
@@ -71,7 +93,10 @@ export default function DashboardPage() {
           ))}
         </div>
 
+        {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Performance Chart */}
           <div className="lg:col-span-2 p-8 rounded-[2rem] border border-white/5 bg-secondary/30 backdrop-blur-xl">
             <h3 className="text-xl font-serif text-white mb-8">Academic Performance History</h3>
             <div className="h-72">
@@ -96,25 +121,81 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          {/* Daily Schedule */}
           <div className="p-8 rounded-[2rem] border border-white/5 bg-secondary/30 backdrop-blur-xl">
-            <h3 className="text-xl font-serif text-white mb-8">Daily Schedule</h3>
-            <div className="space-y-5">
-              {[
-                { time: "09:00 AM", title: "Compiler Design", room: "LT-2", type: "Lecture", color: "bg-blue-500/20" },
-                { time: "11:00 AM", title: "Operating Systems", room: "LT-4", type: "Lecture", color: "bg-purple-500/20" },
-                { time: "02:00 PM", title: "OS Lab", room: "Lab Block 2", type: "Practical", color: "bg-emerald-500/20" },
-              ].map((cls, i) => (
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="text-xl font-serif text-white">Daily Schedule</h3>
+              <span className="text-xs text-gold font-bold uppercase tracking-wider">Today</span>
+            </div>
+            <div className="space-y-4">
+              {mockRoutine.map((cls, i) => (
                 <div key={i} className="flex gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] transition-all group cursor-default">
                   <div className={`w-1 origin-top scale-y-0 group-hover:scale-y-100 transition-transform ${cls.color.replace('/20', '')}`} />
-                  <div className="text-xs text-muted pt-1 w-16">{cls.time}</div>
+                  <div className="text-[10px] text-muted pt-1 w-16">{cls.time}</div>
                   <div>
-                    <h4 className="text-base font-medium text-white group-hover:text-gold transition-colors">{cls.title}</h4>
-                    <p className="text-xs text-muted mt-1 uppercase tracking-wider">{cls.room} • {cls.type}</p>
+                    <h4 className="text-sm font-bold text-white group-hover:text-gold transition-colors">{cls.title}</h4>
+                    <p className="text-[10px] text-muted mt-1 uppercase tracking-wider">{cls.room} • {cls.type}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Course Grades */}
+          <div className="lg:col-span-2 p-8 rounded-[2rem] border border-white/5 bg-secondary/30 backdrop-blur-xl">
+             <h3 className="text-xl font-serif text-white mb-8">Course Grades (Current Sem)</h3>
+             <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      <th className="pb-4 text-xs font-bold text-muted uppercase tracking-widest">Course Code</th>
+                      <th className="pb-4 text-xs font-bold text-muted uppercase tracking-widest text-center">Current Grade</th>
+                      <th className="pb-4 text-xs font-bold text-muted uppercase tracking-widest text-right">Credits</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {mockGrades.map((g, i) => (
+                      <tr key={i} className="group hover:bg-white/[0.02] transition-colors">
+                        <td className="py-5">
+                          <div className="text-white font-bold">{g.code}</div>
+                          <div className="text-xs text-muted">{g.course}</div>
+                        </td>
+                        <td className="py-5 text-center">
+                          <span className="px-3 py-1 rounded-lg bg-gold/10 text-gold font-bold">{g.grade}</span>
+                        </td>
+                        <td className="py-5 text-right text-white/60">{g.credits}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+             </div>
+          </div>
+
+          {/* Assignments */}
+          <div className="p-8 rounded-[2rem] border border-white/5 bg-secondary/30 backdrop-blur-xl">
+             <h3 className="text-xl font-serif text-white mb-8">Upcoming Assignments</h3>
+             <div className="space-y-4">
+                {mockAssignments.map((asgn, i) => (
+                  <div key={i} className="p-4 rounded-2xl border border-white/5 bg-black/20 group hover:border-gold/30 transition-all">
+                    <div className="flex justify-between items-start mb-2">
+                       <h4 className="text-sm font-bold text-white">{asgn.title}</h4>
+                       <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase ${
+                         asgn.priority === 'High' ? 'bg-rose-500/20 text-rose-400' : 
+                         asgn.priority === 'Medium' ? 'bg-amber-500/20 text-amber-400' : 'bg-blue-500/20 text-blue-400'
+                       }`}>
+                         {asgn.priority}
+                       </span>
+                    </div>
+                    <p className="text-xs text-muted mb-3">{asgn.subject}</p>
+                    <div className="flex justify-between items-center text-[10px]">
+                       <span className="text-white/40 font-mono">Due: {asgn.due}</span>
+                       <span className={`font-bold ${asgn.status === 'Submitted' ? 'text-emerald-400' : 'text-gold'}`}>{asgn.status}</span>
+                    </div>
+                  </div>
+                ))}
+             </div>
+          </div>
+
         </div>
       </div>
     </div>
