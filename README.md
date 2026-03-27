@@ -32,6 +32,18 @@
 
 ---
 
+## 📸 Screenshots
+
+| Hero & Navigation | Centres of Excellence |
+| :---: | :---: |
+| ![Hero Section](./frontend/public/screenshots/hero.png) | ![COE Page](./frontend/public/screenshots/coe.png) |
+
+| AI Campus Assistant | Institutional Leadership |
+| :---: | :---: |
+| ![AI Assistant](./frontend/public/screenshots/ai-assistant.png) | ![Leadership Section](./frontend/public/screenshots/leadership.png) |
+
+---
+
 ## 🛠️ Technological Arsenal
 
 | Layer | Technologies |
