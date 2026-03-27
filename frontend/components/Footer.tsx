@@ -19,9 +19,6 @@ export default function Footer() {
                 IIT <span className="text-gold">Delhi</span>
               </span>
             </Link>
-            <p className="text-muted text-sm leading-relaxed mb-6">
-              Indian Institute of Technology Delhi. A completely redesigned frontend experience representing the future of campus OS.
-            </p>
           </div>
           
           {/* Column 2 */}
@@ -60,8 +57,10 @@ export default function Footer() {
         
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-muted">
           <p>© {new Date().getFullYear()} IIT Delhi Campus OS. All rights reserved.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            Hackathon Project - Frontend Only
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <Link href="#" className="hover:text-gold transition">Privacy Policy</Link>
+            <Link href="#" className="hover:text-gold transition">Terms of Use</Link>
+            <Link href="/contacts" className="hover:text-gold transition">Contact</Link>
           </div>
         </div>
       </div>

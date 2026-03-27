@@ -208,13 +208,7 @@ export default function Home() {
             </motion.span>
           </motion.h1>
 
-          {/* 4. Subtext */}
-          <motion.p
-            variants={fadeInUp} custom={0.7} initial="hidden" animate="visible"
-            className="text-muted text-lg md:text-xl max-w-2xl mt-4 mb-12 drop-shadow-md"
-          >
-            A complete, production-ready frontend university platform. Experience the future of campus OS.
-          </motion.p>
+
 
           {/* 5. Search Bar */}
           <motion.div
@@ -265,9 +259,14 @@ export default function Home() {
               className="relative group"
             >
               <motion.div
-                className="absolute -inset-1 bg-gradient-to-r from-gold via-yellow-500 to-orange-500 rounded-full blur-lg"
-                animate={{ opacity: [0.4, 0.8, 0.4] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -inset-1 rounded-full blur-lg"
+                style={{ background: "conic-gradient(from 0deg, #c9a84c, #eab308, #f97316, #c9a84c)" }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute -inset-1 rounded-full blur-lg opacity-0 group-hover:opacity-80 transition-opacity duration-300"
+                style={{ background: "radial-gradient(circle, rgba(201,168,76,0.6) 0%, transparent 70%)" }}
               />
               <Link href="/campus" className="relative flex items-center justify-center px-10 py-4 bg-black/90 rounded-full leading-none overflow-hidden">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gold/40 to-orange-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
