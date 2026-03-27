@@ -1,0 +1,1 @@
+(function(u){if(u.jsi&&u.jsi._fni){u.jsi(u)}}(window))
