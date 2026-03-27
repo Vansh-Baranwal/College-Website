@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import { ChevronDown } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 const navItems = [
   {
@@ -50,6 +51,7 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -91,6 +93,9 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {navItems.map((item) => {
+            // Hide private items if not logged in
+            if (!user && (item.name === "Dashboard" || item.name === "Digital ID")) return null;
+            
             const isActive = pathname === item.href || (item.subLinks && item.subLinks.some(sub => pathname === sub.href));
             return (
               <div key={item.name} className="relative group/nav py-4">
@@ -129,13 +134,29 @@ export default function Navbar() {
           })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/login"
-            className="px-5 py-2 rounded-full text-sm font-medium text-white/70 border border-white/10 hover:bg-white/10 hover:text-white transition-all"
-          >
-            Login
-          </Link>
+        <div className="hidden md:flex items-center gap-4">
+          {!user ? (
+            <Link
+              href="/login"
+              className="px-6 py-2 rounded-full text-sm font-medium text-white/70 border border-white/10 hover:bg-white/10 hover:text-white transition-all"
+            >
+              Login
+            </Link>
+          ) : (
+            <div className="flex items-center gap-4">
+               <div className={`flex items-center gap-2 px-4 py-1.5 rounded-full border ${user.role === 'student' ? 'border-amber-500/30 bg-amber-500/10 text-amber-500' : 'border-cyan-500/30 bg-cyan-500/10 text-cyan-500'} text-xs font-semibold`}>
+                  <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${user.role === 'student' ? 'bg-amber-500' : 'bg-cyan-500'}`} />
+                  {user.name.split(' ')[0]}
+               </div>
+               <button 
+                onClick={logout}
+                className="text-xs text-white/40 hover:text-rose-400 transition-colors font-medium"
+               >
+                 Logout
+               </button>
+            </div>
+          )}
+          
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-gold to-orange-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <Link
@@ -146,6 +167,7 @@ export default function Navbar() {
             </Link>
           </motion.div>
         </div>
+
       </div>
     </header>
   );
