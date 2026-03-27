@@ -42,7 +42,7 @@ function SectionHeader({ title, subtitle, icon: Icon }: SectionHeaderProps) {
         </div>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-white tracking-tight">{title}</h2>
       </div>
-      <p className="text-[#8a9bb5] text-lg border-l-2 border-rose-500/30 pl-6 max-w-3xl">{subtitle}</p>
+      <p className="text-slate-200 text-lg border-l-2 border-rose-500/30 pl-6 max-w-3xl">{subtitle}</p>
     </motion.div>
   );
 }
@@ -57,7 +57,7 @@ export default function AntiraggingPage() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <div ref={containerRef} className="min-h-screen relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden bg-black/40">
       {/* Background Accents */}
       <motion.div 
         style={{ y: bgY }}
@@ -92,7 +92,7 @@ export default function AntiraggingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-slate-400 text-xl max-w-2xl mx-auto mb-12"
+            className="text-slate-200 text-xl max-w-2xl mx-auto mb-12"
           >
             IIT Delhi enforces a strict Zero Tolerance Policy. Every act of physical, mental, or emotional abuse is heavily punishable by law.
           </motion.p>
@@ -130,7 +130,7 @@ export default function AntiraggingPage() {
                   <Clock className="w-5 h-5 text-rose-500" />
                   Key Definitions
                 </h3>
-                <p className="text-slate-400 mb-6 leading-relaxed">
+                <p className="text-slate-200 mb-6 leading-relaxed">
                   Ragging includes any act of physical, mental, emotional, or sexual abuse, including:
                 </p>
                 <ul className="space-y-4">
@@ -140,7 +140,7 @@ export default function AntiraggingPage() {
                      "Verbal abuse or threats of physical violence",
                      "Applies to all campuses, hostels, and online spaces"
                    ].map((item, i) => (
-                     <li key={i} className="flex gap-4 text-sm text-white/70">
+                     <li key={i} className="flex gap-4 text-sm text-white/90">
                         <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5" />
                         {item}
                      </li>
@@ -150,7 +150,7 @@ export default function AntiraggingPage() {
 
              <motion.div 
                whileHover={{ y: -5 }}
-               className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl relative overflow-hidden group"
+               className="p-8 rounded-[2.5rem] bg-black/40 border border-white/10 backdrop-blur-xl relative overflow-hidden group"
              >
                 <div className="absolute top-0 left-0 w-2 h-full bg-cyan-500 opacity-50" />
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
@@ -164,7 +164,7 @@ export default function AntiraggingPage() {
                      "Intensive monitoring of freshers' hostels",
                      "Compulsory FIR filing for serious cases"
                    ].map((item, i) => (
-                     <li key={i} className="flex gap-4 text-sm text-white/70">
+                     <li key={i} className="flex gap-4 text-sm text-white/90">
                         <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 mt-1.5" />
                         {item}
                      </li>
@@ -186,18 +186,18 @@ export default function AntiraggingPage() {
              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                    <div className="text-rose-500 font-serif text-3xl font-bold mb-2">1999</div>
-                   <p className="text-xs text-white/40 uppercase tracking-widest mb-4">Vishwa Jagriti Case</p>
-                   <p className="text-sm text-slate-400">First major stance by SCO taking strong measures against institutional negligence.</p>
+                   <p className="text-xs text-white/60 uppercase tracking-widest mb-4">Vishwa Jagriti Case</p>
+                   <p className="text-sm text-slate-200">First major stance by SCO taking strong measures against institutional negligence.</p>
                 </div>
                 <div>
                    <div className="text-rose-500 font-serif text-3xl font-bold mb-2">2001-07</div>
-                   <p className="text-xs text-white/40 uppercase tracking-widest mb-4">Guidelines Issued</p>
-                   <p className="text-sm text-slate-400">Multiple comprehensive guidelines forcing colleges to take immediate, non-negotiable action.</p>
+                   <p className="text-xs text-white/60 uppercase tracking-widest mb-4">Guidelines Issued</p>
+                   <p className="text-sm text-slate-200">Multiple comprehensive guidelines forcing colleges to take immediate, non-negotiable action.</p>
                 </div>
                 <div>
                    <div className="text-rose-500 font-serif text-3xl font-bold mb-2">2009+</div>
-                   <p className="text-xs text-white/40 uppercase tracking-widest mb-4">Strict Enforcement</p>
-                   <p className="text-sm text-slate-400">Failure by institutional heads to manage ragging became a punishable departmental offense.</p>
+                   <p className="text-xs text-white/60 uppercase tracking-widest mb-4">Strict Enforcement</p>
+                   <p className="text-sm text-slate-200">Failure by institutional heads to manage ragging became a punishable departmental offense.</p>
                 </div>
              </div>
           </div>
@@ -221,12 +221,12 @@ export default function AntiraggingPage() {
              ].map((ipc, i) => (
                <motion.div 
                  key={i}
-                 whileHover={{ scale: 1.05, backgroundColor: "rgba(225, 29, 72, 0.05)" }}
-                 className="p-6 rounded-3xl border border-white/5 bg-white/[0.01] flex flex-col items-center text-center group transition-colors"
+                 whileHover={{ scale: 1.05, backgroundColor: "rgba(225, 29, 72, 0.1)" }}
+                 className="p-6 rounded-3xl border border-white/20 bg-black/60 backdrop-blur-md flex flex-col items-center text-center group transition-colors"
                >
                   <div className="text-rose-500 font-bold mb-1">{ipc.code}</div>
                   <div className="text-white text-sm font-medium mb-3">{ipc.label}</div>
-                  <div className="text-xs text-slate-500">{ipc.desc}</div>
+                  <div className="text-xs text-slate-200">{ipc.desc}</div>
                </motion.div>
              ))}
           </div>
@@ -240,15 +240,8 @@ export default function AntiraggingPage() {
                  <h3 className="text-2xl font-serif font-bold text-white">For Students</h3>
               </div>
               <div className="space-y-4">
-                 {[
-                   "Immediate Suspension from classes",
-                   "Expulsion from the Institution",
-                   "Debarment from taking examinations",
-                   "Rustication for a specific period",
-                   "Hostel expulsion & scholarship cancellation",
-                   "Police FIR filing & Immediate Arrest"
-                 ].map((p, i) => (
-                   <motion.div key={i} whileHover={{ x: 10 }} className="flex gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 text-sm text-slate-400 group hover:border-rose-500/30 transition-all">
+                 {["Immediate Suspension from classes", "Expulsion from the Institution", "Debarment from taking examinations", "Rustication for a specific period", "Hostel expulsion & scholarship cancellation", "Police FIR filing & Immediate Arrest"].map((p, i) => (
+                   <motion.div key={i} whileHover={{ x: 10 }} className="flex gap-4 p-4 rounded-2xl bg-black/40 border border-white/10 text-sm text-slate-200 group hover:border-rose-500/30 transition-all">
                       <AlertTriangle className="w-4 h-4 text-rose-500" />
                       {p}
                    </motion.div>
@@ -263,7 +256,7 @@ export default function AntiraggingPage() {
               </div>
               <div className="p-8 rounded-[2rem] border border-rose-500/20 bg-rose-500/5 relative overflow-hidden">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 blur-3xl" />
-                 <p className="text-slate-400 mb-8 font-medium">If the college fails to act or ignores a report:</p>
+                 <p className="text-slate-200 mb-8 font-medium">If the college fails to act or ignores a report:</p>
                  <div className="space-y-6">
                     <div className="flex gap-5">
                        <div className="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center shrink-0">
