@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, AreaChart, Area, CartesianGrid, Cell } from "recharts";
-import { Briefcase, Building, TrendingUp, ArrowUpRight, Award, Globe, DollarSign } from "lucide-react";
+import { Briefcase, Building, TrendingUp, ArrowUpRight, Award, Globe, DollarSign, Trophy, BookOpen } from "lucide-react";
 
 const salaryData = [
   { year: "2020", avg: 16.5, max: 120 },
@@ -115,6 +115,83 @@ export default function PlacementPage() {
               </ResponsiveContainer>
             </div>
           </motion.div>
+        </div>
+
+        {/* Achievements Section */}
+        <div className="pt-12 space-y-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
+            <h2 className="text-3xl font-serif font-bold text-white mb-3">Campus <span className="text-gold">Achievements</span></h2>
+            <p className="text-muted text-sm max-w-lg mx-auto">A testament to the diverse excellence of our student community beyond academics.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { 
+                title: "Sports Excellence", 
+                value: "15 Gold Medals", 
+                detail: "Inter-IIT Sports Meet 2023", 
+                icon: Trophy, 
+                color: "from-amber-500/20 to-orange-600/10",
+                stats: ["Overall Athletics Trophy", "Gold in Squash & Badminton"]
+              },
+              { 
+                title: "Research Papers", 
+                value: "1,250+ Published", 
+                detail: "In top-tier journals (Q1/Q2)", 
+                icon: BookOpen, 
+                color: "from-blue-500/20 to-indigo-600/10",
+                stats: ["240 IEEE Conference Papers", "15 Nature Journal mentions"]
+              },
+              { 
+                title: "Innovation & Patents", 
+                value: "85 Patents Filed", 
+                detail: "In the 2023-24 Academic Year", 
+                icon: Award, 
+                color: "from-purple-500/20 to-pink-600/10",
+                stats: ["12 Commercialized Startups", "45 International Patents"]
+              },
+              { 
+                title: "Academic Excellence", 
+                value: "9.8 Highest CGPA", 
+                detail: "Department of Computer Science", 
+                icon: TrendingUp, 
+                color: "from-emerald-500/20 to-teal-600/10",
+                stats: ["150+ Dean's List Students", "8 Prime Minister Research Fellows"]
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group relative p-8 rounded-3xl border border-white/10 bg-secondary/30 backdrop-blur-md overflow-hidden hover:border-gold/30 transition-all duration-500"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                
+                <div className="relative z-10 flex gap-6">
+                  <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <item.icon className="w-8 h-8 text-gold" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-2">
+                       <h3 className="text-xl font-bold text-white group-hover:text-gold transition-colors">{item.title}</h3>
+                       <span className="text-gold font-bold text-lg">{item.value}</span>
+                    </div>
+                    <p className="text-xs text-white/50 mb-4 font-medium uppercase tracking-wider">{item.detail}</p>
+                    <div className="space-y-2">
+                       {item.stats.map((s, idx) => (
+                         <div key={idx} className="flex items-center gap-2 text-sm text-white/70">
+                           <div className="w-1.5 h-1.5 rounded-full bg-gold/50" />
+                           {s}
+                         </div>
+                       ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="pt-8">
