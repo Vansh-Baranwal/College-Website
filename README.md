@@ -108,4 +108,4 @@ Created for **IIT Delhi** as part of the **Advanced Agentic Coding** initiative.
 > **Pro Tip**: Use the `Dashboard` shortcut in the Navbar to see the new **Demo Mode** in action without needing to create an account!
 
 ---
-*Developed with ❤️ by Vansh Baranwal.*
+*Developed with ❤️ by Vansh Baranwal, Poorvik A, Harshit Raj.*
