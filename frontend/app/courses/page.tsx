@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Clock, Users, Star, ChevronDown, Filter } from "lucide-react";
 
 const MOCK = [
-  { code: "CSL100", name: "Introduction to Computer Science", department: "Computer Science", credits: 4, semester: "Autumn", level: "UG", enrolled: 450, rating: 4.8 },
-  { code: "MTL106", name: "Probability & Stochastic Processes", department: "Mathematics", credits: 4, semester: "Spring", level: "UG", enrolled: 320, rating: 4.2 },
-  { code: "ELL201", name: "Digital Electronics", department: "Electrical Engineering", credits: 4, semester: "Autumn", level: "UG", enrolled: 280, rating: 4.5 },
-  { code: "COL774", name: "Machine Learning", department: "Computer Science", credits: 4, semester: "Autumn", level: "PG", enrolled: 180, rating: 4.9 },
-  { code: "PHL101", name: "Classical Mechanics", department: "Physics", credits: 4, semester: "Spring", level: "UG", enrolled: 350, rating: 4.3 },
+  { code: "CSL100", name: "Introduction to Computer Science", department: "Computer Science", credits: 4, semester: "Autumn", level: "UG", enrolled: 450, rating: 4.8, faculty: "Dr. Naveen Garg", intro: "A foundational course covering algorithms, data structures, and the joy of computing." },
+  { code: "MTL106", name: "Probability & Stochastic Processes", department: "Mathematics", credits: 4, semester: "Spring", level: "UG", enrolled: 320, rating: 4.2, faculty: "Prof. S. Dharmaraja", intro: "Explore the mathematics of chance and its applications in real-world stochastic modeling." },
+  { code: "ELL201", name: "Digital Electronics", department: "Electrical Engineering", credits: 4, semester: "Autumn", level: "UG", enrolled: 280, rating: 4.5, faculty: "Dr. Shouribrata Chatterjee", intro: "From logic gates to complex processors, learn the building blocks of modern computing hardware." },
+  { code: "COL774", name: "Machine Learning", department: "Computer Science", credits: 4, semester: "Autumn", level: "PG", enrolled: 180, rating: 4.9, faculty: "Prof. Mausam", intro: "Dive into the algorithms that power AI, from regression to deep neural networks." },
+  { code: "PHL101", name: "Classical Mechanics", department: "Physics", credits: 4, semester: "Spring", level: "UG", enrolled: 350, rating: 4.3, faculty: "Dr. Hitendra K. Malik", intro: "Understand the laws of motion that govern everything from atoms to interstellar bodies." },
 ];
 
 export default function CoursesPage() {
