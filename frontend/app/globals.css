@@ -42,3 +42,33 @@ body {
 .animate-shimmer {
   animation: shimmer 4s ease-in-out infinite;
 }
+
+/* Morphing blobs */
+@keyframes blob {
+  0%, 100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; transform: translate(0, 0) scale(1); }
+  25% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; transform: translate(20px, -30px) scale(1.05); }
+  50% { border-radius: 30% 60% 70% 40% / 50% 30% 60% 70%; transform: translate(-10px, 20px) scale(0.95); }
+  75% { border-radius: 50% 30% 50% 60% / 40% 60% 30% 50%; transform: translate(15px, 10px) scale(1.02); }
+}
+
+@keyframes blob2 {
+  0%, 100% { border-radius: 60% 40% 40% 60% / 40% 60% 60% 40%; transform: translate(0, 0) scale(1); }
+  33% { border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%; transform: translate(-20px, 15px) scale(1.08); }
+  66% { border-radius: 50% 50% 40% 60% / 50% 50% 60% 40%; transform: translate(10px, -20px) scale(0.96); }
+}
+
+.animate-blob { animation: blob 12s ease-in-out infinite; }
+.animate-blob2 { animation: blob2 15s ease-in-out infinite; }
+
+/* Smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}

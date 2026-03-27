@@ -5,6 +5,8 @@ import { AppProvider } from "@/lib/context";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
 
 const playfair = Playfair_Display({
   variable: "--font-heading",
@@ -54,13 +56,16 @@ export default function RootLayout({
                  style={{ backgroundImage: "linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
           </div>
 
-          <Navbar />
-          <PageTransition>
-            <main className="min-h-screen">
-              {children}
-            </main>
-          </PageTransition>
-          <Footer />
+          <SmoothScroll>
+            <Navbar />
+            <CustomCursor />
+            <PageTransition>
+              <main className="min-h-screen">
+                {children}
+              </main>
+            </PageTransition>
+            <Footer />
+          </SmoothScroll>
         </AppProvider>
       </body>
     </html>
