@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/lib/context";
 import Navbar from "@/components/Navbar";
@@ -8,17 +8,18 @@ import PageTransition from "@/components/PageTransition";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 
-const playfair = Playfair_Display({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
 });
 
-const dmMono = DM_Mono({
+const jetbrains = JetBrains_Mono({
   variable: "--font-mono",
   weight: ["400", "500"],
   subsets: ["latin"],
@@ -37,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} antialiased`}
       >
         <AppProvider>
           <div className="fixed inset-0 w-full h-full -z-50 overflow-hidden bg-primary">

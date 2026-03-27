@@ -255,38 +255,38 @@ export default function Home() {
           </motion.div>
 
           {/* Logo */}
-          <motion.div variants={scaleIn} custom={0.3} initial="hidden" animate="visible" className="mb-8 relative">
-            <motion.div className="absolute inset-0 bg-gold/30 blur-3xl rounded-full" animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
-            <img src="/logo.png" alt="IIT Delhi Seal" className="w-24 h-24 md:w-32 md:h-32 object-contain relative z-10 filter brightness-0 invert opacity-90 drop-shadow-[0_0_30px_rgba(201,168,76,0.4)]" />
+          <motion.div variants={scaleIn} custom={0.3} initial="hidden" animate="visible" className="mb-6 relative">
+            <motion.div className="absolute -inset-4 bg-gold/20 blur-3xl rounded-full" animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
+            <img src="/logo.png" alt="IIT Delhi Seal" className="w-20 h-20 md:w-24 md:h-24 object-contain relative z-10 filter brightness-0 invert drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]" />
           </motion.div>
 
           {/* Heading */}
-          <motion.h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
-            <span className="text-white block mb-3 drop-shadow-lg">
+          <motion.h1 className="font-serif text-5xl md:text-8xl font-bold mb-6 tracking-tight leading-[1.1]">
+            <span className="text-white block mb-2" style={{ textShadow: "0 0 40px rgba(255,255,255,0.15), 0 2px 10px rgba(0,0,0,0.5)" }}>
               <AnimatedWords text="Indian Institute of" />
             </span>
             <motion.span variants={staggerContainer} initial="hidden" animate="visible" className="inline-flex flex-wrap justify-center gap-x-[0.3em]">
               {["Technology", "Delhi"].map((word, i) => (
                 <motion.span key={i} variants={wordVariant}>
-                  <span className="bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_100%] text-transparent bg-clip-text animate-shimmer drop-shadow-lg">{word}</span>
+                  <span className="bg-gradient-to-r from-[#d4af37] via-[#f0d060] to-[#d4af37] bg-[length:200%_100%] text-transparent bg-clip-text animate-shimmer" style={{ textShadow: "none", WebkitTextStroke: "0px" }}>{word}</span>
                 </motion.span>
               ))}
             </motion.span>
           </motion.h1>
 
           {/* Search Bar */}
-          <motion.div variants={fadeInUp} custom={0.9} initial="hidden" animate="visible" className="w-full max-w-xl mx-auto mb-14 mt-4 relative">
+          <motion.div variants={fadeInUp} custom={0.9} initial="hidden" animate="visible" className="w-full max-w-xl mx-auto mb-14 mt-6 relative">
             <motion.div
-              animate={{ boxShadow: searchFocused ? "0 0 40px 8px rgba(201,168,76,0.25)" : "0 0 15px 2px rgba(201,168,76,0.08)", scale: searchFocused ? 1.02 : 1 }}
+              animate={{ boxShadow: searchFocused ? "0 0 40px 8px rgba(212,175,55,0.3), 0 0 80px 20px rgba(212,175,55,0.1)" : "0 0 20px 4px rgba(212,175,55,0.1)", scale: searchFocused ? 1.02 : 1 }}
               transition={{ duration: 0.4 }}
               className="rounded-full"
             >
               <form action="/chat" className="relative group">
                 <input type="text" name="q" placeholder="Ask AI anything about the campus..."
                   onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
-                  className="w-full bg-white/5 border border-white/15 rounded-full py-4 pl-6 pr-14 text-white placeholder-white/35 focus:outline-none focus:border-gold/60 focus:bg-white/10 transition-all duration-500 backdrop-blur-md shadow-xl" />
-                <motion.button title="Search" type="submit" whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.9 }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 bg-gold/20 text-gold rounded-full hover:bg-gold hover:text-primary transition-colors duration-300">
+                  className="w-full bg-white/[0.08] border border-white/20 rounded-full py-4 pl-6 pr-14 text-white placeholder-white/50 focus:outline-none focus:border-gold/70 focus:bg-white/[0.12] transition-all duration-500 backdrop-blur-xl shadow-2xl text-base" />
+                <motion.button title="Search" type="submit" whileHover={{ scale: 1.15, backgroundColor: "#d4af37" }} whileTap={{ scale: 0.9 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-gold/30 text-gold rounded-full hover:text-primary transition-colors duration-300 shadow-lg">
                   <Search className="w-5 h-5" />
                 </motion.button>
               </form>
@@ -294,23 +294,23 @@ export default function Home() {
           </motion.div>
 
           {/* Buttons */}
-          <motion.div style={{ x: btnX, y: btnY }} className="flex flex-col sm:flex-row gap-6">
+          <motion.div style={{ x: btnX, y: btnY }} className="flex flex-col sm:flex-row gap-8">
             <MagneticButton href="/campus" className="relative group">
               <motion.div variants={buttonSpring} custom={1.1} initial="hidden" animate="visible">
-                <motion.div className="absolute -inset-1 rounded-full blur-lg" style={{ background: "conic-gradient(from 0deg, #c9a84c, #eab308, #f97316, #c9a84c)" }} animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
-                <div className="relative flex items-center justify-center px-10 py-4 bg-black/90 rounded-full leading-none overflow-hidden">
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gold/40 to-orange-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                  <span className="relative text-gold font-bold text-lg tracking-wider group-hover:text-white transition-colors duration-300">EXPLORE CAMPUS</span>
+                <motion.div className="absolute -inset-[2px] rounded-full blur-md" style={{ background: "conic-gradient(from 0deg, #d4af37, #eab308, #f97316, #d4af37)" }} animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
+                <div className="relative flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#0d1020] to-[#111830] rounded-full leading-none overflow-hidden border border-gold/20">
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gold/30 to-orange-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                  <span className="relative text-gold font-bold text-base tracking-widest group-hover:text-white transition-colors duration-300">EXPLORE CAMPUS</span>
                 </div>
               </motion.div>
             </MagneticButton>
 
             <MagneticButton href="/dashboard" className="relative group">
               <motion.div variants={buttonSpring} custom={1.2} initial="hidden" animate="visible">
-                <motion.div className="absolute -inset-1 rounded-full blur-lg" style={{ background: "conic-gradient(from 0deg, #3b82f6, #8b5cf6, #6366f1, #3b82f6)" }} animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
-                <div className="relative flex items-center justify-center px-10 py-4 bg-[#0a0f1e] rounded-full leading-none overflow-hidden">
+                <motion.div className="absolute -inset-[2px] rounded-full blur-md" style={{ background: "conic-gradient(from 0deg, #3b82f6, #8b5cf6, #6366f1, #3b82f6)" }} animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
+                <div className="relative flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#0d1020] to-[#111830] rounded-full leading-none overflow-hidden border border-indigo-500/20">
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                  <span className="relative text-white font-bold text-lg tracking-wider">STUDENT PORTAL</span>
+                  <span className="relative text-blue-300 font-bold text-base tracking-widest group-hover:text-white transition-colors duration-300">STUDENT PORTAL</span>
                 </div>
               </motion.div>
             </MagneticButton>

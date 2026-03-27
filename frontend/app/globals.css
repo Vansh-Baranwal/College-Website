@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0f1e;
-  --foreground: #ffffff;
-  --primary: #0a0f1e;
-  --secondary: #0d1530;
-  --accent-gold: #c9a84c;
-  --light-gold: #e8c97a;
+  --background: #030712;
+  --foreground: #e2e8f0;
+  --primary: #030712;
+  --secondary: #0f172a;
+  --accent-gold: #f59e0b;
+  --light-gold: #fbbf24;
   --purple: #a78bfa;
-  --muted-text: #8a9bb5;
+  --muted-text: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-emerald: #34d399;
 }
 
 @theme inline {
@@ -20,6 +22,8 @@
   --color-gold-light: var(--light-gold);
   --color-purple: var(--purple);
   --color-muted: var(--muted-text);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-emerald: var(--accent-emerald);
   
   --font-sans: var(--font-body);
   --font-serif: var(--font-heading);
@@ -33,14 +37,26 @@ body {
   overflow-x: hidden;
 }
 
-/* Gold shimmer animation for hero text */
+/* Gold shimmer animation */
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
 .animate-shimmer {
-  animation: shimmer 4s ease-in-out infinite;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Dynamic gradient shift */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
 }
 
 /* Morphing blobs */
@@ -60,6 +76,16 @@ body {
 .animate-blob { animation: blob 12s ease-in-out infinite; }
 .animate-blob2 { animation: blob2 15s ease-in-out infinite; }
 
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1); }
+}
+
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
 /* Smooth scroll */
 html.lenis, html.lenis body {
   height: auto;
@@ -71,4 +97,10 @@ html.lenis, html.lenis body {
 
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
+}
+
+/* Selection */
+::selection {
+  background: rgba(245, 158, 11, 0.3);
+  color: #fff;
 }
