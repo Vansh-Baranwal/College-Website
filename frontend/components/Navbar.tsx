@@ -22,7 +22,7 @@ const navItems = [
     name: "Campus Life",
     href: "/campus",
     subLinks: [
-      { name: "Virtual Campus", href: "/campus" },
+      { name: "Virtual Campus", href: "https://360-degree-nine.vercel.app/" },
       { name: "Events", href: "/events" },
       { name: "Mental Health", href: "/mental-health" },
       { name: "Lost & Found", href: "/lost-found" },
@@ -48,6 +48,13 @@ const navItems = [
   },
   { name: "Dashboard", href: "/dashboard" },
   { name: "Digital ID", href: "/id" },
+  {
+    name: "Other",
+    href: "#",
+    subLinks: [
+      { name: "Antiragging", href: "/antiragging" },
+    ]
+  },
 ];
 
 export default function Navbar() {
@@ -126,11 +133,20 @@ export default function Navbar() {
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-[90]">
                     <div className="w-48 bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col gap-1 relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gold/10 blur-xl rounded-full pointer-events-none" />
-                      {item.subLinks.map(sub => (
-                         <Link key={sub.name} href={sub.href} className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors relative z-10">
-                           {sub.name}
-                         </Link>
-                      ))}
+                      {item.subLinks.map(sub => {
+                        const isExternal = sub.href.startsWith("http");
+                        return (
+                          <Link 
+                            key={sub.name} 
+                            href={sub.href} 
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
+                            className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors relative z-10"
+                          >
+                            {sub.name}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

@@ -137,9 +137,16 @@ function MagneticButton({ children, className, href }: { children: React.ReactNo
   const sx = useSpring(x, { stiffness: 200, damping: 15 });
   const sy = useSpring(y, { stiffness: 200, damping: 15 });
 
+  const isExternal = href.startsWith("http");
   return (
     <motion.div ref={ref} style={{ x: sx, y: sy }} onMouseMove={handleMouse} onMouseLeave={reset} className={className}>
-      <Link href={href}>{children}</Link>
+      <Link 
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </Link>
     </motion.div>
   );
 }
@@ -215,7 +222,7 @@ export default function Home() {
   ];
 
   const features = [
-    { title: "Departments", desc: "8 engineering + science departments with world-class labs", icon: Building, href: "/departments", gradient: "from-blue-500/20 to-indigo-500/20" },
+    { title: "Virtual Tour", desc: "Experience the campus in 360° from your browser", icon: Building, href: "https://360-degree-nine.vercel.app/", gradient: "from-blue-500/20 to-indigo-500/20" },
     { title: "AI Chat Assistant", desc: "Ask anything about campus, courses, or events", icon: Brain, href: "/chat", gradient: "from-gold/20 to-orange-500/20" },
     { title: "Events Hub", desc: "Rendezvous, Tryst, hackathons, and 100+ events yearly", icon: Calendar, href: "/events", gradient: "from-green-500/20 to-emerald-500/20" },
     { title: "Digital ID", desc: "Secure QR-based campus ID with rotating codes", icon: Shield, href: "/id", gradient: "from-purple/20 to-violet-500/20" },
@@ -299,7 +306,7 @@ export default function Home() {
 
           {/* Buttons */}
           <motion.div style={{ x: btnX, y: btnY }} className="flex flex-col sm:flex-row gap-5">
-            <MagneticButton href="/campus" className="relative group">
+            <MagneticButton href="https://360-degree-nine.vercel.app/" className="relative group">
               <motion.div variants={buttonSpring} custom={1.1} initial="hidden" animate="visible">
                 <motion.div className="absolute -inset-[2px] rounded-2xl blur-md opacity-70" style={{ background: "conic-gradient(from 0deg, #f59e0b, #fbbf24, #f97316, #f59e0b)" }} animate={{ rotate: 360 }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }} />
                 <div className="relative flex items-center justify-center px-10 py-4 bg-[#0a0f1c] rounded-2xl leading-none overflow-hidden border border-amber-500/20">
@@ -408,7 +415,12 @@ export default function Home() {
                   transition={{ delay: i * 0.08, duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <Link href={feature.href} className="block relative group p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-amber-500/20 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.06)] overflow-hidden h-full">
+                  <Link 
+                    href={feature.href} 
+                    target={feature.href.startsWith("http") ? "_blank" : undefined}
+                    rel={feature.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="block relative group p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-amber-500/20 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.06)] overflow-hidden h-full"
+                  >
                     {/* Hover reveal gradient */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     

@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <h4 className="font-medium text-white mb-6">Campus Life</h4>
             <ul className="space-y-3 text-sm text-muted">
-              <li><Link href="/campus" className="hover:text-gold transition">Hostels</Link></li>
+              <li><Link href="https://360-degree-nine.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition">Virtual Tour</Link></li>
               <li><Link href="/events" className="hover:text-gold transition">Events</Link></li>
               <li><Link href="/mental-health" className="hover:text-gold transition">Mental Health</Link></li>
               <li><Link href="/lost-found" className="hover:text-gold transition">Lost & Found</Link></li>
