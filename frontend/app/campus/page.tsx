@@ -34,7 +34,7 @@ export default function CampusPage() {
       {/* 360 Viewer Container */}
       <div className="w-full h-[calc(100vh-80px)] bg-black relative overflow-hidden group border-y border-white/10">
         <iframe 
-          src="/360 degree/international.iitd.ac.in/campus-tour/index.html" 
+          src="/360-viewer.html" 
           className="w-full h-full border-none"
           title="Virtual Campus Tour"
           allowFullScreen

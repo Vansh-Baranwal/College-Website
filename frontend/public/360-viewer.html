@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannellum Viewer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        #panorama {
+            width: 100vw;
+            height: 100vh;
+        }
+        body, html { margin: 0; padding: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <div id="panorama"></div>
+    <script>
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "/360 degree/international.iitd.ac.in/campus-tour/wp-content/uploads/sites/4/2022/08/home-vt.jpg",
+            "autoLoad": true,
+            "title": "IIT Delhi Campus Tour",
+            "author": "Smart Campus OS",
+            "hfov": 110,
+            "vaov": 180,
+            "vOffset": 0,
+            "yaw": 0,
+            "pitch": 0,
+            "compass": true,
+            "northOffset": 240
+        });
+    </script>
+</body>
+</html>
