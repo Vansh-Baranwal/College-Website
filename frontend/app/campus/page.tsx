@@ -9,7 +9,7 @@ export default function CampusPage() {
       {/* 360 Viewer Container */}
       <div className="w-full h-[calc(100vh-80px)] bg-black relative overflow-hidden group border-y border-white/10 mt-[-24px]">
         <iframe 
-          src="/proxied-tour/screen1/" 
+          src="/api/proxy/campus-tour/screen1/" 
           className="w-full h-full border-none"
           title="Virtual Campus Tour"
           allowFullScreen
