@@ -9,29 +9,6 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* HERO SECTION */}
       <section className="relative w-full h-screen overflow-hidden">
-        {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute w-full h-full object-cover hidden md:block"
-          poster="/campus.jpg"
-        >
-          <source src="/campus-tour.mp4" type="video/mp4" />
-        </video>
-        
-        {/* Mobile Fallback Background */}
-        <div className="absolute w-full h-full bg-[url('/campus.jpg')] bg-cover bg-center md:hidden" />
-        
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-primary/55 z-10" />
-        
-        {/* Grid Overlay */}
-        <div className="absolute inset-0 z-10 opacity-20" 
-             style={{ backgroundImage: "linear-gradient(to right, #ffffff10 1px, transparent 1px), linear-gradient(to bottom, #ffffff10 1px, transparent 1px)", backgroundSize: "40px 40px" }} 
-        />
-        
         {/* Content */}
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 mt-10">
           <motion.div 

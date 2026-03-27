@@ -32,7 +32,7 @@ export default function CampusPage() {
       </div>
 
       {/* Panorama Container Placeholder */}
-      <div className="w-full h-[calc(100vh-80px)] bg-primary relative overflow-hidden group border-y border-white/10">
+      <div className="w-full h-[calc(100vh-80px)] bg-primary/40 relative overflow-hidden group border-y border-white/10">
         {/* Fake 3D environment using background image and parallax */}
         <div className="absolute inset-0 bg-[url('/campus.jpg')] bg-cover bg-center md:bg-[length:120%_auto] transition-transform duration-[20s] ease-linear group-hover:scale-110 opacity-40 blur-[2px]" />
         

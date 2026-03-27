@@ -53,7 +53,7 @@ export default function MentalHealthPage() {
   }, []);
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-6 transition-colors duration-1000 bg-[#0d0914]">
+    <div className="min-h-screen pt-24 pb-20 px-6 transition-colors duration-1000">
       {/* Background Glow */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#a78bfa]/10 blur-[150px] rounded-full" />

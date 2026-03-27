@@ -38,6 +38,23 @@ export default function RootLayout({
         className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable} antialiased`}
       >
         <AppProvider>
+          <div className="fixed inset-0 w-full h-full -z-50 overflow-hidden bg-primary">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute w-full h-full object-cover hidden md:block opacity-60"
+              poster="/campus.jpg"
+            >
+              <source src="/campus-tour.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute w-full h-full bg-[url('/campus.jpg')] bg-cover bg-center md:hidden opacity-60" />
+            <div className="absolute inset-0 bg-primary/70 z-10" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] z-10" 
+                 style={{ backgroundImage: "linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+          </div>
+
           <Navbar />
           <PageTransition>
             <main className="min-h-screen">
