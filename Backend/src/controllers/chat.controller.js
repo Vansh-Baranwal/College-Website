@@ -1,5 +1,6 @@
 const aiService = require('../services/ai.service');
 const supabaseService = require('../services/supabase.service');
+const mentalHealthService = require('../services/mentalHealth.service');
 
 /**
  * Handles incoming chat messages.
@@ -15,9 +16,16 @@ const handleChat = async (req, res) => {
     }
 
     const lowerMsg = message.toLowerCase();
+
+    // 1. Wellness Intercept (Mental Health keywords)
+    const wellnessResponse = mentalHealthService.checkMentalHealthIntent(lowerMsg);
+    if (wellnessResponse) {
+      return res.status(200).json({ reply: wellnessResponse });
+    }
+
     let contextData = null;
 
-    // Simple Intent Detection
+    // 2. Simple Intent Detection
     if (lowerMsg.includes('event')) {
       contextData = await supabaseService.getEvents();
     } else if (lowerMsg.includes('announcement')) {
