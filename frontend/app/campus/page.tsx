@@ -31,27 +31,22 @@ export default function CampusPage() {
         <div className="absolute -right-2 text-[10px] lg:text-xs font-bold text-gold">E</div>
       </div>
 
-      {/* Panorama Container Placeholder */}
-      <div className="w-full h-[calc(100vh-80px)] bg-primary/40 relative overflow-hidden group border-y border-white/10">
-        {/* Fake 3D environment using background image and parallax */}
-        <div className="absolute inset-0 bg-[url('/campus.jpg')] bg-cover bg-center md:bg-[length:120%_auto] transition-transform duration-[20s] ease-linear group-hover:scale-110 opacity-40 blur-[2px]" />
+      {/* 360 Viewer Container */}
+      <div className="w-full h-[calc(100vh-80px)] bg-black relative overflow-hidden group border-y border-white/10">
+        <iframe 
+          src="/360 degree/international.iitd.ac.in/campus-tour/index.html" 
+          className="w-full h-full border-none"
+          title="Virtual Campus Tour"
+          allowFullScreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        />
         
-        {/* Gradient overlays for depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/80 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-transparent to-primary/80 pointer-events-none" />
-        
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center">
-            <span className="px-6 py-3 bg-black/60 backdrop-blur-md rounded-full text-sm text-white font-medium border border-white/20 shadow-xl">
-                {/* TODO: Replace with ReactPannellum */}
-                Interactive 360° Viewer Loaded
-            </span>
+        {/* Overlay for branding and control help */}
+        <div className="absolute bottom-12 left-8 z-20 pointer-events-none sm:block hidden">
+           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-[10px] text-white/60 tracking-widest uppercase font-bold">
+             Drag to look around • Use wheel to zoom
+           </div>
         </div>
-
-        {/* Hotspots */}
-        <Hotspot top="30%" left="20%" label="Central Library" isNew />
-        <Hotspot top="60%" left="50%" label="Main Building" />
-        <Hotspot top="45%" left="80%" label="Hostel Avenue" />
-        <Hotspot top="70%" left="25%" label="Sports Complex" />
       </div>
       
       {/* Bottom info bar */}
@@ -67,30 +62,3 @@ export default function CampusPage() {
   );
 }
 
-function Hotspot({ top, left, label, isNew = false }: { top: string, left: string, label: string, isNew?: boolean }) {
-    return (
-        <motion.div 
-            className="absolute z-20 cursor-pointer group"
-            style={{ top, left }}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', delay: Math.random() }}
-        >
-            <div className="relative">
-                <div className="w-12 h-12 bg-gold/20 rounded-full animate-ping absolute -top-3 -left-3" />
-                <div className="w-6 h-6 bg-gold rounded-full border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(201,168,76,0.8)] relative z-10 transition-transform group-hover:scale-125">
-                    <span className="w-2 h-2 bg-primary rounded-full" />
-                </div>
-            </div>
-            
-            <div className="absolute top-8 left-1/2 -translate-x-1/2 w-max opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex flex-col items-center">
-                <div className="w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-black/80" />
-                <div className="bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20 text-xs font-medium text-white shadow-xl flex items-center gap-2">
-                    <MapPin className="w-3 h-3 text-gold" />
-                    {label}
-                    {isNew && <span className="bg-red-500 text-[9px] px-1 py-0.5 rounded text-white ml-1 font-bold">NEW</span>}
-                </div>
-            </div>
-        </motion.div>
-    );
-}
