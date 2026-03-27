@@ -17,6 +17,32 @@ app.use('/api/auth', authRoutes);
 app.use('/api/data', dataRoutes);
 app.use('/api/search', searchRoutes);
 
+// Root API route
+app.get("/api", (req, res) => {
+  res.json({
+    status: "success",
+    message: "API is running 🚀",
+    endpoints: {
+      auth: [
+        "/api/auth/signup",
+        "/api/auth/login"
+      ],
+      chatbot: [
+        "/api/chat"
+      ],
+      search: [
+        "/api/search?q=..."
+      ],
+      data: [
+        "/api/data/courses",
+        "/api/data/events",
+        "/api/data/departments",
+        "/api/data/faculty"
+      ]
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
