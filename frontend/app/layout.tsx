@@ -47,12 +47,12 @@ export default function RootLayout({
               muted
               loop
               playsInline
-              className="absolute w-full h-full object-cover hidden md:block opacity-60"
+              className="absolute w-full h-full object-cover hidden md:block opacity-90"
             >
               <source src="/campus-tour.mp4" type="video/mp4" />
             </video>
-            <div className="absolute w-full h-full bg-primary md:hidden opacity-60" />
-            <div className="absolute inset-0 bg-primary/70 z-10" />
+            <div className="absolute w-full h-full bg-primary md:hidden" />
+            <div className="absolute inset-0 bg-primary/40 z-10" />
             <div className="absolute inset-0 z-10" 
                  style={{ backgroundImage: "linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
           </div>

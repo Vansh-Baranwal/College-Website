@@ -43,14 +43,15 @@ const buttonSpring = {
 // ─── PARTICLE SYSTEM ───
 function ParticleField() {
   const particles = useMemo(() =>
-    Array.from({ length: 35 }, (_, i) => ({
+    Array.from({ length: 40 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      duration: Math.random() * 15 + 10,
-      delay: Math.random() * 8,
-      opacity: Math.random() * 0.5 + 0.2,
+      size: Math.random() * 3 + 1.5,
+      duration: Math.random() * 12 + 8,
+      delay: Math.random() * 6,
+      opacity: Math.random() * 0.6 + 0.3,
+      hue: Math.random() > 0.7 ? '34,211,238' : '245,158,11', // cyan or amber
     })), []);
 
   return (
@@ -63,9 +64,9 @@ function ParticleField() {
             left: `${p.x}%`,
             width: p.size,
             height: p.size,
-            background: `radial-gradient(circle, rgba(201,168,76,${p.opacity}) 0%, transparent 70%)`,
-            boxShadow: `0 0 ${p.size * 3}px rgba(201,168,76,${p.opacity * 0.5})`,
-            filter: `blur(${p.size > 2.5 ? 1 : 0}px)`,
+            background: `radial-gradient(circle, rgba(${p.hue},${p.opacity}) 0%, transparent 70%)`,
+            boxShadow: `0 0 ${p.size * 4}px rgba(${p.hue},${p.opacity * 0.5})`,
+            filter: `blur(${p.size > 3 ? 1 : 0}px)`,
           }}
           initial={{ y: `${p.y + 10}vh`, opacity: 0 }}
           animate={{
@@ -227,20 +228,23 @@ export default function Home() {
       {/* ═══════ HERO SECTION ═══════ */}
       <section ref={heroRef} className="relative w-full h-screen overflow-hidden">
         {/* Vignette */}
-        <motion.div className="absolute inset-0 z-[15] pointer-events-none" style={{ opacity: bgOpacity, boxShadow: "inset 0 0 150px 60px rgba(10,15,30,0.95)" }} />
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 z-[12] pointer-events-none bg-gradient-to-b from-primary/80 via-transparent to-primary" />
-        <div className="absolute inset-0 z-[11] pointer-events-none bg-gradient-to-t from-primary via-transparent to-transparent" />
+        <motion.div className="absolute inset-0 z-[15] pointer-events-none" style={{ opacity: bgOpacity, boxShadow: "inset 0 0 100px 40px rgba(3,7,18,0.7)" }} />
+        {/* Gradient overlays — soft fade at bottom, no hard cutoff */}
+        <div className="absolute inset-0 z-[12] pointer-events-none bg-gradient-to-b from-primary/60 via-transparent to-primary/70" />
+        <div className="absolute inset-0 z-[11] pointer-events-none bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
         {/* Grid */}
         <div className="absolute inset-0 z-[11] pointer-events-none opacity-[0.07]"
           style={{ backgroundImage: "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)", backgroundSize: "50px 50px" }} />
 
         {/* Morphing Blobs */}
-        <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] z-[9] pointer-events-none opacity-30">
-          <div className="w-full h-full bg-gradient-to-br from-gold/40 to-orange-500/20 rounded-full blur-[80px] animate-blob" />
+        <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] z-[9] pointer-events-none opacity-40">
+          <div className="w-full h-full bg-gradient-to-br from-amber-500/30 to-orange-600/20 rounded-full blur-[80px] animate-blob" />
         </div>
-        <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] z-[9] pointer-events-none opacity-20">
-          <div className="w-full h-full bg-gradient-to-br from-purple/30 to-blue-500/20 rounded-full blur-[80px] animate-blob2" />
+        <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] z-[9] pointer-events-none opacity-30">
+          <div className="w-full h-full bg-gradient-to-br from-cyan-500/25 to-blue-600/15 rounded-full blur-[80px] animate-blob2" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] z-[8] pointer-events-none opacity-15">
+          <div className="w-full h-full bg-gradient-to-br from-emerald-500/30 to-teal-500/20 rounded-full blur-[100px] animate-blob" />
         </div>
 
         <ParticleField />
@@ -249,26 +253,26 @@ export default function Home() {
         <motion.div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4" style={{ x: contentX, y: contentY }}>
           {/* Badge */}
           <motion.div variants={fadeInUp} custom={0.2} initial="hidden" animate="visible"
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gold/30 bg-gold/10 backdrop-blur-md text-gold text-sm font-medium mb-8 shadow-[0_0_20px_rgba(201,168,76,0.1)]">
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 backdrop-blur-md text-amber-400 text-sm font-medium mb-8 shadow-[0_0_25px_rgba(245,158,11,0.15)]">
             <Sparkles className="w-4 h-4" />
             Ranked #1 in India — NIRF 2024
           </motion.div>
 
           {/* Logo */}
           <motion.div variants={scaleIn} custom={0.3} initial="hidden" animate="visible" className="mb-6 relative">
-            <motion.div className="absolute -inset-4 bg-gold/20 blur-3xl rounded-full" animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
-            <img src="/logo.png" alt="IIT Delhi Seal" className="w-20 h-20 md:w-24 md:h-24 object-contain relative z-10 filter brightness-0 invert drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]" />
+            <motion.div className="absolute -inset-6 bg-amber-500/15 blur-3xl rounded-full" animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
+            <img src="/logo.png" alt="IIT Delhi Seal" className="w-20 h-20 md:w-24 md:h-24 object-contain relative z-10 filter brightness-0 invert drop-shadow-[0_0_25px_rgba(245,158,11,0.5)]" />
           </motion.div>
 
           {/* Heading */}
-          <motion.h1 className="font-serif text-5xl md:text-8xl font-bold mb-6 tracking-tight leading-[1.1]">
-            <span className="text-white block mb-2" style={{ textShadow: "0 0 40px rgba(255,255,255,0.15), 0 2px 10px rgba(0,0,0,0.5)" }}>
+          <motion.h1 className="font-sans text-5xl md:text-8xl font-bold mb-6 tracking-tighter leading-[1.05]">
+            <span className="text-white block mb-1" style={{ textShadow: "0 0 60px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)" }}>
               <AnimatedWords text="Indian Institute of" />
             </span>
-            <motion.span variants={staggerContainer} initial="hidden" animate="visible" className="inline-flex flex-wrap justify-center gap-x-[0.3em]">
+            <motion.span variants={staggerContainer} initial="hidden" animate="visible" className="inline-flex flex-wrap justify-center gap-x-[0.25em]">
               {["Technology", "Delhi"].map((word, i) => (
                 <motion.span key={i} variants={wordVariant}>
-                  <span className="bg-gradient-to-r from-[#d4af37] via-[#f0d060] to-[#d4af37] bg-[length:200%_100%] text-transparent bg-clip-text animate-shimmer" style={{ textShadow: "none", WebkitTextStroke: "0px" }}>{word}</span>
+                  <span className="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-[length:200%_100%] text-transparent bg-clip-text animate-shimmer">{word}</span>
                 </motion.span>
               ))}
             </motion.span>
@@ -277,16 +281,16 @@ export default function Home() {
           {/* Search Bar */}
           <motion.div variants={fadeInUp} custom={0.9} initial="hidden" animate="visible" className="w-full max-w-xl mx-auto mb-14 mt-6 relative">
             <motion.div
-              animate={{ boxShadow: searchFocused ? "0 0 40px 8px rgba(212,175,55,0.3), 0 0 80px 20px rgba(212,175,55,0.1)" : "0 0 20px 4px rgba(212,175,55,0.1)", scale: searchFocused ? 1.02 : 1 }}
+              animate={{ boxShadow: searchFocused ? "0 0 40px 8px rgba(245,158,11,0.2), 0 0 80px 20px rgba(34,211,238,0.08)" : "0 0 20px 4px rgba(245,158,11,0.06)", scale: searchFocused ? 1.02 : 1 }}
               transition={{ duration: 0.4 }}
-              className="rounded-full"
+              className="rounded-2xl"
             >
               <form action="/chat" className="relative group">
                 <input type="text" name="q" placeholder="Ask AI anything about the campus..."
                   onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
-                  className="w-full bg-white/[0.08] border border-white/20 rounded-full py-4 pl-6 pr-14 text-white placeholder-white/50 focus:outline-none focus:border-gold/70 focus:bg-white/[0.12] transition-all duration-500 backdrop-blur-xl shadow-2xl text-base" />
-                <motion.button title="Search" type="submit" whileHover={{ scale: 1.15, backgroundColor: "#d4af37" }} whileTap={{ scale: 0.9 }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-gold/30 text-gold rounded-full hover:text-primary transition-colors duration-300 shadow-lg">
+                  className="w-full bg-white/[0.06] border border-white/[0.12] rounded-2xl py-4 pl-6 pr-14 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.1] transition-all duration-500 backdrop-blur-xl shadow-2xl text-base" />
+                <motion.button title="Search" type="submit" whileHover={{ scale: 1.15, backgroundColor: "#f59e0b" }} whileTap={{ scale: 0.9 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-amber-500/20 text-amber-400 rounded-xl hover:text-black transition-colors duration-300 shadow-lg">
                   <Search className="w-5 h-5" />
                 </motion.button>
               </form>
@@ -294,23 +298,23 @@ export default function Home() {
           </motion.div>
 
           {/* Buttons */}
-          <motion.div style={{ x: btnX, y: btnY }} className="flex flex-col sm:flex-row gap-8">
+          <motion.div style={{ x: btnX, y: btnY }} className="flex flex-col sm:flex-row gap-5">
             <MagneticButton href="/campus" className="relative group">
               <motion.div variants={buttonSpring} custom={1.1} initial="hidden" animate="visible">
-                <motion.div className="absolute -inset-[2px] rounded-full blur-md" style={{ background: "conic-gradient(from 0deg, #d4af37, #eab308, #f97316, #d4af37)" }} animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
-                <div className="relative flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#0d1020] to-[#111830] rounded-full leading-none overflow-hidden border border-gold/20">
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gold/30 to-orange-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                  <span className="relative text-gold font-bold text-base tracking-widest group-hover:text-white transition-colors duration-300">EXPLORE CAMPUS</span>
+                <motion.div className="absolute -inset-[2px] rounded-2xl blur-md opacity-70" style={{ background: "conic-gradient(from 0deg, #f59e0b, #fbbf24, #f97316, #f59e0b)" }} animate={{ rotate: 360 }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }} />
+                <div className="relative flex items-center justify-center px-10 py-4 bg-[#0a0f1c] rounded-2xl leading-none overflow-hidden border border-amber-500/20">
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                  <span className="relative text-amber-400 font-semibold text-sm tracking-[0.2em] uppercase group-hover:text-white transition-colors duration-300">Explore Campus</span>
                 </div>
               </motion.div>
             </MagneticButton>
 
             <MagneticButton href="/dashboard" className="relative group">
               <motion.div variants={buttonSpring} custom={1.2} initial="hidden" animate="visible">
-                <motion.div className="absolute -inset-[2px] rounded-full blur-md" style={{ background: "conic-gradient(from 0deg, #3b82f6, #8b5cf6, #6366f1, #3b82f6)" }} animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
-                <div className="relative flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#0d1020] to-[#111830] rounded-full leading-none overflow-hidden border border-indigo-500/20">
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                  <span className="relative text-blue-300 font-bold text-base tracking-widest group-hover:text-white transition-colors duration-300">STUDENT PORTAL</span>
+                <motion.div className="absolute -inset-[2px] rounded-2xl blur-md opacity-70" style={{ background: "conic-gradient(from 0deg, #22d3ee, #818cf8, #a78bfa, #22d3ee)" }} animate={{ rotate: 360 }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }} />
+                <div className="relative flex items-center justify-center px-10 py-4 bg-[#0a0f1c] rounded-2xl leading-none overflow-hidden border border-cyan-500/20">
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                  <span className="relative text-cyan-400 font-semibold text-sm tracking-[0.2em] uppercase group-hover:text-white transition-colors duration-300">Student Portal</span>
                 </div>
               </motion.div>
             </MagneticButton>
@@ -329,13 +333,13 @@ export default function Home() {
       </section>
 
       {/* ═══════ SCROLL PROGRESS BAR ═══════ */}
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-gold z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-amber-500 z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
 
       {/* ═══════ STATS SECTION ═══════ */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-24 -mt-20 overflow-hidden">
         {/* Morphing blob */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none opacity-10">
-          <div className="w-full h-full bg-gradient-to-r from-gold to-purple rounded-full blur-[100px] animate-blob" />
+          <div className="w-full h-full bg-gradient-to-r from-amber-500 to-cyan-500 rounded-full blur-[100px] animate-blob" />
         </div>
 
         <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -346,13 +350,13 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-              The Numbers <span className="bg-gradient-to-r from-gold to-gold-light text-transparent bg-clip-text">Speak</span>
+            <h2 className="text-4xl md:text-6xl font-sans font-bold text-white mb-4 tracking-tight">
+              The Numbers <span className="bg-gradient-to-r from-amber-400 to-yellow-300 text-transparent bg-clip-text">Speak</span>
             </h2>
-            <p className="text-muted text-lg max-w-lg mx-auto">India&apos;s premier institution, producing world-class talent since 1961.</p>
+            <p className="text-slate-400 text-lg max-w-lg mx-auto">India&apos;s premier institution, producing world-class talent since 1961.</p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {stats.map((stat, i) => (
               <TiltCard key={stat.label}>
                 <motion.div
@@ -360,14 +364,14 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
-                  className="relative group p-8 rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl text-center hover:border-gold/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(201,168,76,0.1)] overflow-hidden"
+                  className="relative group p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl text-center hover:border-amber-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.08)] overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-b from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <stat.icon className="w-8 h-8 text-gold mx-auto mb-4 relative z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <stat.icon className="w-8 h-8 text-amber-400 mx-auto mb-4 relative z-10" />
                   <p className="text-4xl md:text-5xl font-bold text-white mb-2 font-mono relative z-10">
                     <CountUp target={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="text-muted text-sm relative z-10">{stat.label}</p>
+                  <p className="text-slate-500 text-sm relative z-10">{stat.label}</p>
                 </motion.div>
               </TiltCard>
             ))}
@@ -378,7 +382,7 @@ export default function Home() {
       {/* ═══════ FEATURES GRID ═══════ */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] pointer-events-none opacity-15">
-          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple rounded-full blur-[100px] animate-blob2" />
+          <div className="w-full h-full bg-gradient-to-br from-cyan-500 to-indigo-500 rounded-full blur-[100px] animate-blob2" />
         </div>
 
         <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -389,13 +393,13 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-              Explore <span className="bg-gradient-to-r from-gold to-gold-light text-transparent bg-clip-text">Campus OS</span>
+            <h2 className="text-4xl md:text-6xl font-sans font-bold text-white mb-4 tracking-tight">
+              Explore <span className="bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text">Campus OS</span>
             </h2>
-            <p className="text-muted text-lg max-w-lg mx-auto">Every tool a student needs, in one premium platform.</p>
+            <p className="text-slate-400 text-lg max-w-lg mx-auto">Every tool a student needs, in one premium platform.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((feature, i) => (
               <TiltCard key={feature.title}>
                 <motion.div
@@ -404,19 +408,19 @@ export default function Home() {
                   transition={{ delay: i * 0.08, duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <Link href={feature.href} className="block relative group p-8 rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-gold/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(201,168,76,0.08)] overflow-hidden h-full">
+                  <Link href={feature.href} className="block relative group p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl hover:border-amber-500/20 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.06)] overflow-hidden h-full">
                     {/* Hover reveal gradient */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     
                     <div className="relative z-10">
-                      <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 group-hover:border-gold/30 group-hover:bg-gold/10 transition-all duration-500">
-                        <feature.icon className="w-7 h-7 text-gold" />
+                      <div className="w-14 h-14 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center mb-5 group-hover:border-amber-500/30 group-hover:bg-amber-500/10 transition-all duration-500">
+                        <feature.icon className="w-7 h-7 text-amber-400" />
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors duration-300">{feature.title}</h3>
-                      <p className="text-muted text-sm leading-relaxed mb-4">{feature.desc}</p>
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors duration-300">{feature.title}</h3>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-4">{feature.desc}</p>
                       
                       {/* Hover reveal arrow */}
-                      <div className="flex items-center gap-2 text-gold text-sm font-medium opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      <div className="flex items-center gap-2 text-amber-400 text-sm font-medium opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                         Explore <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
@@ -430,31 +434,32 @@ export default function Home() {
 
       {/* ═══════ CTA SECTION ═══════ */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-500/[0.03] to-transparent pointer-events-none" />
         <div className="container mx-auto px-6 max-w-4xl text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="p-12 md:p-16 rounded-3xl border border-gold/20 bg-white/[0.03] backdrop-blur-xl relative overflow-hidden"
+            className="p-12 md:p-16 rounded-3xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent" />
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 blur-[100px] rounded-full" />
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/[0.04] to-cyan-500/[0.02]" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-[100px] rounded-full" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-cyan-500/10 blur-[80px] rounded-full" />
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-5xl font-sans font-bold text-white mb-6 tracking-tight">
                 Ready to experience <br/>
-                <span className="bg-gradient-to-r from-gold to-gold-light text-transparent bg-clip-text">Campus OS</span>?
+                <span className="bg-gradient-to-r from-amber-400 to-cyan-400 text-transparent bg-clip-text animate-gradient">Campus OS</span>?
               </h2>
-              <p className="text-muted text-lg mb-10 max-w-md mx-auto">Login to your dashboard and explore the future of campus life.</p>
+              <p className="text-slate-400 text-lg mb-10 max-w-md mx-auto">Login to your dashboard and explore the future of campus life.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <MagneticButton href="/dashboard" className="relative group">
-                  <div className="px-10 py-4 bg-gold rounded-full font-bold text-primary text-lg hover:bg-gold-light transition-colors shadow-[0_0_30px_rgba(201,168,76,0.3)] hover:shadow-[0_0_50px_rgba(201,168,76,0.5)]">
+                  <div className="px-10 py-4 bg-amber-500 rounded-2xl font-bold text-black text-base hover:bg-amber-400 transition-colors shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:shadow-[0_0_50px_rgba(245,158,11,0.5)] tracking-wide">
                     Open Dashboard
                   </div>
                 </MagneticButton>
                 <MagneticButton href="/chat" className="relative group">
-                  <div className="px-10 py-4 border border-white/20 rounded-full font-bold text-white text-lg hover:bg-white/10 transition-colors backdrop-blur-sm">
+                  <div className="px-10 py-4 border border-white/[0.15] rounded-2xl font-bold text-white text-base hover:bg-white/10 transition-colors backdrop-blur-sm tracking-wide">
                     Try AI Chat
                   </div>
                 </MagneticButton>
@@ -466,3 +471,4 @@ export default function Home() {
     </div>
   );
 }
+
