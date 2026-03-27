@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  // Bypass Node.js strict SSL certificate validation for IIT Delhi's server
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
   // Await the params correctly as required by Next.js 15+ 
   const resolvedParams = await params;
   const pathParts = resolvedParams.path || [];
