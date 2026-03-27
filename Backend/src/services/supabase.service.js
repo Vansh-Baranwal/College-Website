@@ -46,10 +46,40 @@ const getFaculty = async () => {
   return data;
 };
 
+/**
+ * Global search across departments, faculty, and courses using case-insensitive matching.
+ * @param {string} q - Search query string
+ */
+const searchAll = async (q) => {
+  if (!q || typeof q !== 'string' || q.trim() === '') {
+    return { departments: [], faculty: [], courses: [] };
+  }
+
+  const searchTerm = `%${q}%`;
+
+  // Request all tables concurrently for efficiency
+  const [deptRes, facultyRes, coursesRes] = await Promise.all([
+    supabase.from('departments').select('*').ilike('name', searchTerm),
+    supabase.from('faculty').select('*').ilike('name', searchTerm),
+    supabase.from('courses').select('*').or(`name.ilike.${searchTerm},code.ilike.${searchTerm}`)
+  ]);
+
+  if (deptRes.error) throw new Error(`Error searching departments: ${deptRes.error.message}`);
+  if (facultyRes.error) throw new Error(`Error searching faculty: ${facultyRes.error.message}`);
+  if (coursesRes.error) throw new Error(`Error searching courses: ${coursesRes.error.message}`);
+
+  return {
+    departments: deptRes.data || [],
+    faculty: facultyRes.data || [],
+    courses: coursesRes.data || []
+  };
+};
+
 module.exports = {
   supabase,
   getAnnouncements,
   getEvents,
   getCourses,
-  getFaculty
+  getFaculty,
+  searchAll
 };

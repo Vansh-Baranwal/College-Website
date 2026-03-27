@@ -3,6 +3,7 @@ const cors = require('cors');
 const chatRoutes = require('./routes/chat.routes');
 const authRoutes = require('./routes/auth.routes');
 const dataRoutes = require('./routes/data.routes');
+const searchRoutes = require('./routes/search.routes');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/api/chat', chatRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/data', dataRoutes);
+app.use('/api/search', searchRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
