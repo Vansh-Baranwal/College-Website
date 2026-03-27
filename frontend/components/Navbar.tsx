@@ -31,15 +31,6 @@ const navItems = [
     ]
   },
   { name: "COE", href: "/coe" },
-  {
-    name: "Admission",
-    href: "#",
-    subLinks: [
-      { name: "B.Tech", href: "/admission/btech" },
-      { name: "M.Tech", href: "/admission/mtech" },
-      { name: "PhD", href: "/admission/phd" },
-    ]
-  },
   { name: "Dashboard", href: "/dashboard" },
   { name: "Digital ID", href: "/id" },
   {
