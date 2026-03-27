@@ -1,5 +1,4 @@
-// Email service disabled temporarily to avoid timeouts
-// const emailService = require('../services/email.service');
+const emailService = require('../services/email.service');
 
 const triggerRaggingAlert = async (req, res) => {
   try {
@@ -11,14 +10,16 @@ const triggerRaggingAlert = async (req, res) => {
 
     console.log("🚨 Ragging Alert Triggered:", studentId);
 
+    await emailService.sendRaggingAlert(studentId);
+
     return res.status(200).json({
-      message: "Alert triggered successfully 🚨",
+      message: "Alert sent successfully 🚨",
       studentId
     });
 
   } catch (error) {
     console.error("[Ragging Controller Error]", error.message);
-    return res.status(500).json({ error: "Something went wrong" });
+    return res.status(500).json({ error: "Email failed" });
   }
 };
 
