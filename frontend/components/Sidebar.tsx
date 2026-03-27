@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Calendar, FileText, CheckCircle, Search, User, CreditCard, Award, Heart } from "lucide-react";
+import { LayoutDashboard, Calendar, FileText, CheckCircle, Search, User, CreditCard, Award, Heart, Shield } from "lucide-react";
 
 const navGroups = [
   {
@@ -17,7 +17,7 @@ const navGroups = [
   {
     title: "Campus",
     items: [
-      { name: "Lost & Found", href: "/lost-found", icon: Search },
+      { name: "Lost & Found", icon: Shield, href: "https://lost-and-found-ten-gamma.vercel.app/" },
       { name: "Mental Health", href: "/mental-health", icon: Heart },
       { name: "Events", href: "/events", icon: Calendar },
     ]

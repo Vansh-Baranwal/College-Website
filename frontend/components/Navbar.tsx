@@ -9,41 +9,35 @@ import { ChevronDown } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 
 const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
   {
     name: "Academics",
-    href: "/courses",
+    href: "#",
     subLinks: [
       { name: "Courses", href: "/courses" },
       { name: "Departments", href: "/departments" },
-      { name: "Faculty", href: "/faculty" },
+      { name: "Faculties", href: "/faculties" },
     ]
   },
   {
-    name: "Campus Life",
-    href: "/campus",
+    name: "Campus",
+    href: "#",
     subLinks: [
       { name: "Virtual Campus", href: "https://360-degree-nine.vercel.app/" },
       { name: "Events", href: "/events" },
       { name: "Mental Health", href: "/mental-health" },
-      { name: "Lost & Found", href: "/lost-found" },
+      { name: "Lost & Found", href: "https://lost-and-found-ten-gamma.vercel.app/" },
     ]
   },
+  { name: "COE", href: "/coe" },
   {
-    name: "Careers",
-    href: "/placement",
+    name: "Admission",
+    href: "#",
     subLinks: [
-      { name: "Placements", href: "/placement" },
-      { name: "Alumni Network", href: "/alumni" },
-    ]
-  },
-  {
-    name: "Services",
-    href: "/announcements",
-    subLinks: [
-      { name: "Announcements", href: "/announcements" },
-      { name: "Messages", href: "/messages" },
-      { name: "Contacts", href: "/contacts" },
-      { name: "Certificates", href: "/certificates" },
+      { name: "B.Tech", href: "/admission/btech" },
+      { name: "M.Tech", href: "/admission/mtech" },
+      { name: "PhD", href: "/admission/phd" },
     ]
   },
   { name: "Dashboard", href: "/dashboard" },

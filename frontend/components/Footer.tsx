@@ -39,7 +39,7 @@ export default function Footer() {
               <li><Link href="https://360-degree-nine.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition">Virtual Tour</Link></li>
               <li><Link href="/events" className="hover:text-gold transition">Events</Link></li>
               <li><Link href="/mental-health" className="hover:text-gold transition">Mental Health</Link></li>
-              <li><Link href="/lost-found" className="hover:text-gold transition">Lost & Found</Link></li>
+                <li><a href="https://lost-and-found-ten-gamma.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Lost & Found</a></li>
             </ul>
           </div>
 
