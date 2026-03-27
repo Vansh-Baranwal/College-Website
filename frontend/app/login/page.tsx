@@ -32,7 +32,11 @@ export default function LoginPage() {
       } else {
         await signup(name, email, password, role);
       }
-      router.push("/dashboard");
+      if (role === 'faculty') {
+        router.push("/faculty-dashboard");
+      } else {
+        router.push("/dashboard");
+      }
     } catch (err: any) {
       setError(err.message || "Authentication failed");
     } finally {

@@ -96,11 +96,16 @@ export default function Navbar() {
             // Hide private items if not logged in
             if (!user && (item.name === "Dashboard" || item.name === "Digital ID")) return null;
             
-            const isActive = pathname === item.href || (item.subLinks && item.subLinks.some(sub => pathname === sub.href));
+            let href = item.href;
+            if (item.name === "Dashboard" && user?.role === 'faculty') {
+                href = "/faculty-dashboard";
+            }
+
+            const isActive = pathname === href || (item.subLinks && item.subLinks.some(sub => pathname === sub.href));
             return (
               <div key={item.name} className="relative group/nav py-4">
                 <Link
-                  href={item.href}
+                  href={href}
                   className="relative text-sm font-medium text-muted hover:text-white transition-colors flex items-center gap-1 group/link"
                 >
                   {item.name}
