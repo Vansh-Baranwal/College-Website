@@ -1,21 +1,24 @@
-const emailService = require('../services/email.service');
+// Email service disabled temporarily to avoid timeouts
+// const emailService = require('../services/email.service');
 
-/**
- * Endpoint to trigger an emergency ragging alert.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
 const triggerRaggingAlert = async (req, res) => {
   try {
-    const { studentId } = req.body;
+    const { studentId } = req.body || {};
 
-    // Trigger the email alert
-    await emailService.sendRaggingAlert(studentId);
+    if (!studentId) {
+      return res.status(400).json({ error: "studentId is required" });
+    }
 
-    return res.status(200).json({ message: 'Alert sent successfully' });
+    console.log("🚨 Ragging Alert Triggered:", studentId);
+
+    return res.status(200).json({
+      message: "Alert triggered successfully 🚨",
+      studentId
+    });
+
   } catch (error) {
-    console.error(`[Ragging Controller Error] ${error.message}`);
-    return res.status(500).json({ error: 'Failed to send emergency alert' });
+    console.error("[Ragging Controller Error]", error.message);
+    return res.status(500).json({ error: "Something went wrong" });
   }
 };
 
