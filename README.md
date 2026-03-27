@@ -32,6 +32,18 @@
 
 ---
 
+## 📸 Screenshots
+
+| Hero & Navigation | Centres of Excellence |
+| :---: | :---: |
+| ![Hero Section](file:///C:/Users/vansh/.gemini/antigravity/brain/01888f80-c56a-4c39-b4bd-c9f6dea380f8/media__1774615351396.png) | ![COE Page](file:///C:/Users/vansh/.gemini/antigravity/brain/01888f80-c56a-4c39-b4bd-c9f6dea380f8/media__1774615358444.png) |
+
+| AI Campus Assistant | Institutional Leadership |
+| :---: | :---: |
+| ![AI Assistant](file:///C:/Users/vansh/.gemini/antigravity/brain/01888f80-c56a-4c39-b4bd-c9f6dea380f8/media__1774615365735.png) | ![Leadership Section](file:///C:/Users/vansh/.gemini/antigravity/brain/01888f80-c56a-4c39-b4bd-c9f6dea380f8/media__1774615376011.png) |
+
+---
+
 ## 🛠️ Technological Arsenal
 
 | Layer | Technologies |
