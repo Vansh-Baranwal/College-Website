@@ -59,8 +59,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 w-full z-[90] transition-all duration-300 backdrop-blur-md border-b ${
         scrolled
-          ? "bg-primary/80 border-white/10 py-4 shadow-lg"
-          : "bg-primary/50 border-white/5 py-6"
+          ? "bg-primary/80 border-white/10 py-2.5 shadow-lg"
+          : "bg-primary/50 border-white/5 py-3.5"
       }`}
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
@@ -95,7 +95,7 @@ export default function Navbar() {
 
             const isActive = pathname === href || (item.subLinks && item.subLinks.some(sub => pathname === sub.href));
             return (
-              <div key={item.name} className="relative group/nav py-4">
+              <div key={item.name} className="relative group/nav py-2 text-sm">
                 <Link
                   href={href}
                   className="relative text-sm font-medium text-muted hover:text-white transition-colors flex items-center gap-1 group/link"
