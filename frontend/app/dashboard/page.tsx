@@ -39,20 +39,20 @@ const mockRoutine = [
 ];
 
 export default function DashboardPage() {
-  const { user, isLoading } = useAuth();
+  const { user: authUser, isLoading } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!isLoading) {
-      if (!user) {
-        router.push("/login");
-      } else if (user.role === 'faculty') {
-        router.push("/faculty-dashboard");
-      }
-    }
-  }, [user, isLoading, router]);
+  // Demo user for preview optimization
+  const demoUser = {
+    name: "Vansh Baranwal",
+    role: "student" as const,
+    id: "demo-123"
+  };
 
-  if (isLoading || !user || user.role !== 'student') {
+  const isDemo = !authUser;
+  const user = authUser || demoUser;
+
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="w-12 h-12 border-4 border-gold/20 border-t-gold rounded-full animate-spin" />
@@ -65,14 +65,19 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex justify-between items-end border-b border-white/10 pb-8">
         <div>
-          <motion.h1 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-4xl md:text-5xl font-serif text-white font-bold"
-          >
-            Welcome back, <span className="text-gold capitalize">{user.name.split(' ')[0]}</span>
-          </motion.h1>
-          <p className="text-[#8a9bb5] mt-2 text-lg">
+          <div className="flex items-center gap-3 mb-2">
+            <motion.h1 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-4xl md:text-5xl font-serif text-white font-bold"
+            >
+              Welcome back, <span className="text-gold capitalize">{user.name.split(' ')[0]}</span>
+            </motion.h1>
+            {isDemo && (
+              <span className="px-2 py-0.5 rounded-md bg-gold/10 border border-gold/20 text-gold text-[10px] font-bold uppercase tracking-widest">Demo Profile</span>
+            )}
+          </div>
+          <p className="text-[#8a9bb5] text-lg">
             B.Tech Computer Science Engineering • Year III
           </p>
         </div>
@@ -87,7 +92,7 @@ export default function DashboardPage() {
           {[
             { label: "Current CGPA", value: "9.2", icon: TrendingUp, delta: "+0.3", color: "text-gold" },
             { label: "Active Courses", value: "6", icon: Book, delta: "18 credits", color: "text-blue-400" },
-            { label: "Upcoming Deadlines", value: "4", icon: AlertCircle, delta: "Next: OS Lab", color: "text-rose-400" },
+            { label: "Upcoming Deadlines", value: mockAssignments.length.toString(), icon: AlertCircle, delta: "Next: OS Lab", color: "text-rose-400" },
           ].map((stat, i) => (
             <DashboardStatCard key={stat.label} stat={stat} index={i} />
           ))}
