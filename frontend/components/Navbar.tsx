@@ -5,13 +5,29 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const links = [
+import { ChevronDown } from "lucide-react";
+
+const navItems = [
   { name: "Academics", href: "#academics" },
+  {
+    name: "Campus Life",
+    href: "/campus",
+    subLinks: [
+      { name: "Virtual Campus", href: "/campus" },
+      { name: "Events", href: "/events" },
+      { name: "Mental Health", href: "/mental-health" },
+      { name: "Lost & Found", href: "/lost-found" },
+    ]
+  },
+  {
+    name: "Careers",
+    href: "/placement",
+    subLinks: [
+      { name: "Placements", href: "/placement" },
+      { name: "Alumni Network", href: "/alumni" },
+    ]
+  },
   { name: "Dashboard", href: "/dashboard" },
-  { name: "Campus", href: "/campus" },
-  { name: "Placements", href: "/placement" },
-  { name: "Events", href: "/events" },
-  { name: "Alumni", href: "/alumni" },
   { name: "Digital ID", href: "/id" },
 ];
 
@@ -55,36 +71,55 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href || (item.subLinks && item.subLinks.some(sub => pathname === sub.href));
             return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="relative text-sm font-medium text-muted hover:text-white transition-colors group"
-              >
-                {link.name}
-                {isActive && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 w-full h-[2px] bg-gold"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
+              <div key={item.name} className="relative group/nav py-4">
+                <Link
+                  href={item.href}
+                  className="relative text-sm font-medium text-muted hover:text-white transition-colors flex items-center gap-1 group/link"
+                >
+                  {item.name}
+                  {item.subLinks && <ChevronDown className="w-3 h-3 transition-transform group-hover/nav:rotate-180" />}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-indicator"
+                      className="absolute -bottom-1 left-0 w-full h-[2px] bg-gold"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold/50 transition-all duration-300 group-hover/link:w-full" />
+                </Link>
+
+                {/* Dropdown Menu */}
+                {item.subLinks && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
+                    <div className="w-48 bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col gap-1 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gold/10 blur-xl rounded-full pointer-events-none" />
+                      {item.subLinks.map(sub => (
+                         <Link key={sub.name} href={sub.href} className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors relative z-10">
+                           {sub.name}
+                         </Link>
+                      ))}
+                    </div>
+                  </div>
                 )}
-                <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold/50 transition-all duration-300 group-hover:w-full" />
-              </Link>
+              </div>
             );
           })}
         </nav>
 
-        <Link
-          href="/chat"
-          className="hidden md:flex items-center justify-center bg-gold/10 hover:bg-gold/20 text-gold border border-gold/30 px-5 py-2 rounded-full font-medium text-sm transition-all shadow-[0_0_15px_rgba(201,168,76,0.15)] hover:shadow-[0_0_20px_rgba(201,168,76,0.3)] hover:-translate-y-0.5"
-        >
-          AI Assistant
-        </Link>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:block relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-gold to-orange-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+          <Link
+            href="/chat"
+            className="relative flex items-center justify-center bg-black/80 backdrop-blur-md px-6 py-2 rounded-full font-bold text-sm text-white group-hover:text-gold transition-colors shadow-xl"
+          >
+            AI Assistant
+          </Link>
+        </motion.div>
       </div>
     </header>
   );

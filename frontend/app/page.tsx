@@ -78,14 +78,33 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-6 perspective-1000 mt-4"
           >
-            <Link href="/campus" className="px-8 py-3 rounded-full bg-gold text-primary font-medium hover:bg-gold-light transition-colors shadow-[0_0_20px_rgba(201,168,76,0.2)] hover:shadow-[0_0_25px_rgba(201,168,76,0.4)]">
-              Explore Campus
-            </Link>
-            <Link href="/dashboard" className="px-8 py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/10 backdrop-blur-sm transition-colors">
-              Student Portal
-            </Link>
+            <motion.div
+              whileHover={{ scale: 1.05, rotateX: 10, rotateY: 10 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative group"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold via-yellow-500 to-red-500 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+              <Link href="/campus" className="relative flex items-center justify-center px-10 py-4 bg-black rounded-full leading-none truncate overflow-hidden">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gold/50 to-orange-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                <span className="relative text-gold font-bold text-lg tracking-wider group-hover:text-white transition-colors mix-blend-screen">EXPLORE CAMPUS</span>
+                <div className="absolute inset-0 border-2 border-gold/50 rounded-full scale-105 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500"></div>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05, rotateX: -10, rotateY: -10 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative group"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+              <Link href="/dashboard" className="relative flex items-center justify-center px-10 py-4 bg-[#0a0f1e] rounded-full leading-none overflow-hidden">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                <span className="relative text-white font-bold text-lg tracking-wider">STUDENT PORTAL</span>
+                <div className="absolute inset-0 border-2 border-blue-400/50 rounded-full scale-105 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500"></div>
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
         
