@@ -8,7 +8,15 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const navItems = [
-  { name: "Academics", href: "#academics" },
+  {
+    name: "Academics",
+    href: "/courses",
+    subLinks: [
+      { name: "Courses", href: "/courses" },
+      { name: "Departments", href: "/departments" },
+      { name: "Faculty", href: "/faculty" },
+    ]
+  },
   {
     name: "Campus Life",
     href: "/campus",
@@ -25,6 +33,16 @@ const navItems = [
     subLinks: [
       { name: "Placements", href: "/placement" },
       { name: "Alumni Network", href: "/alumni" },
+    ]
+  },
+  {
+    name: "Services",
+    href: "/announcements",
+    subLinks: [
+      { name: "Announcements", href: "/announcements" },
+      { name: "Messages", href: "/messages" },
+      { name: "Contacts", href: "/contacts" },
+      { name: "Certificates", href: "/certificates" },
     ]
   },
   { name: "Dashboard", href: "/dashboard" },
