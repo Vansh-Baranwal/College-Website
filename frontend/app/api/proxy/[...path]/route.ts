@@ -11,11 +11,10 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const url = new URL(request.url);
   const search = url.search;
   
-  // Construct the target URL. The original URL the user wanted was 
-  // https://international.iitd.ac.in/campus-tour/screen1/
-  // Since we catch all routes starting from /api/proxy/, 
-  // the 'path' variable will contain 'campus-tour/screen1/...'
-  const targetUrl = `https://international.iitd.ac.in/${path}${search}`;
+  // Construct the target URL.
+  // Preserve trailing slashes which are critical for WordPress directories
+  const hasTrailingSlash = url.pathname.endsWith('/');
+  const targetUrl = `https://international.iitd.ac.in/${path}${hasTrailingSlash && path ? '/' : ''}${search}`;
 
   try {
     // Act as a middleman and fetch the requested resource on behalf of the browser
@@ -38,6 +37,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     newHeaders.delete("content-security-policy");
     newHeaders.delete("x-content-security-policy");
     newHeaders.delete("x-webkit-csp");
+
+    // NODE FIX: Node's fetch automatically decompresses gzip/br payloads.
+    // We MUST delete the content-encoding and content-length headers so the browser doesn't try to double-decompress the raw arrayBuffer we return.
+    newHeaders.delete("content-encoding");
+    newHeaders.delete("content-length");
 
     // Cookie Rewriting: Prevent the destination from rejecting cross-origin session cookies
     const setCookie = newHeaders.get("set-cookie");
