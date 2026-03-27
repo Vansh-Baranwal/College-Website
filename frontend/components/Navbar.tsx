@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-[90] transition-all duration-300 ${
         scrolled
           ? "bg-primary/70 backdrop-blur-md border-b border-white/5 py-4"
           : "bg-transparent py-6"
@@ -118,7 +118,7 @@ export default function Navbar() {
 
                 {/* Dropdown Menu */}
                 {item.subLinks && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-[90]">
                     <div className="w-48 bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col gap-1 relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gold/10 blur-xl rounded-full pointer-events-none" />
                       {item.subLinks.map(sub => (
