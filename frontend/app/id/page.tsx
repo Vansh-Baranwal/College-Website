@@ -39,7 +39,8 @@ export default function DigitalIDPage() {
           >
             {/* Card Background Layer */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0d1530] to-[#0a0f1e] z-0" />
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[url('/grid.svg')] opacity-20 z-0 pointer-events-none" />
+            <div className="absolute inset-0 opacity-[0.03] z-0 pointer-events-none" 
+                 style={{ backgroundImage: `linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
             <div className="absolute -top-20 -right-20 w-48 h-48 bg-gold/20 blur-3xl rounded-full z-0" />
             <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-gold/10 blur-3xl rounded-full z-0" />
 

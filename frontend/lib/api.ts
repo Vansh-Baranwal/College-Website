@@ -1,7 +1,13 @@
 const API = process.env.NEXT_PUBLIC_API_URL || "";
+if (typeof window !== "undefined" && !API) {
+  console.warn("⚠️ NEXT_PUBLIC_API_URL is not defined. All API calls will fail with 404 on the frontend domain.");
+}
 
 // ── Helper ──
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
+  if (!API && typeof window !== "undefined") {
+     throw new Error("Backend API URL not configured. Please set NEXT_PUBLIC_API_URL.");
+  }
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const headers: Record<string, string> = { "Content-Type": "application/json", ...(options?.headers as Record<string, string>) };
   if (token) headers["Authorization"] = `Bearer ${token}`;
