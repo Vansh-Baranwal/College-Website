@@ -4,32 +4,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pannellum Viewer</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" href="/lib/pannellum/pannellum.css"/>
+    <script type="text/javascript" src="/lib/pannellum/pannellum.js"></script>
     <style>
         #panorama {
             width: 100vw;
             height: 100vh;
+            background-color: #000;
         }
         body, html { margin: 0; padding: 0; overflow: hidden; }
+        #start-prompt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: sans-serif;
+            pointer-events: none;
+            transition: opacity 1s;
+        }
     </style>
 </head>
 <body>
+    <div id="start-prompt">Drag to explore IIT Delhi</div>
     <div id="panorama"></div>
     <script>
-        pannellum.viewer('panorama', {
+        const viewer = pannellum.viewer('panorama', {
             "type": "equirectangular",
             "panorama": "/360 degree/international.iitd.ac.in/campus-tour/wp-content/uploads/sites/4/2022/08/home-vt.jpg",
             "autoLoad": true,
+            "autoRotate": -2,
             "title": "IIT Delhi Campus Tour",
-            "author": "Smart Campus OS",
-            "hfov": 110,
-            "vaov": 180,
-            "vOffset": 0,
+            "hfov": 120,
+            "minHfov": 50,
+            "maxHfov": 150,
+            "pitch": -5,
             "yaw": 0,
-            "pitch": 0,
             "compass": true,
-            "northOffset": 240
+            "northOffset": 240,
+            "showControls": true,
+            "mouseZoom": true
+        });
+
+        viewer.on('mousedown', () => {
+             document.getElementById('start-prompt').style.opacity = '0';
         });
     </script>
 </body>
